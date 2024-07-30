@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.netty.handler.timeout.TimeoutException;
 
 public class Login {
@@ -24,20 +27,23 @@ public class Login {
 	Properties properties;
 
 
+	@SuppressWarnings("deprecation")
 	@Given("Launch the url in Chrome")
 	public void launch_the_url_in_chrome() throws IOException {
 
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Praveen Developer\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
-		ChromeOptions option = new ChromeOptions();
-		option.addArguments("--remote-allow-origins=*");
-		driver = new ChromeDriver(option);
-		wait = new WebDriverWait(driver, Duration.ofSeconds(22));
-		driver.manage().window().maximize();
-		FileInputStream input = new FileInputStream("C:\\Users\\Praveen Developer\\source\\repos\\ccvic\\CCVIC-Dev\\File\\Credentials.file");
+		WebDriverManager.chromedriver().setup(); // Automatically downloads and manages the WebDriver
+        ChromeOptions ch = new ChromeOptions();
+        ch.addArguments("--remote-allow-origins=*");
+       driver = new ChromeDriver(ch);
+       wait= new WebDriverWait(driver,Duration.ofSeconds(22));
+
+        // Apply global implicit wait
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS); // Set your desired wait time
+        FileInputStream input = new FileInputStream("./File/Credentials.file");
 		properties = new Properties();
 		properties.load(input);
-
-		driver.get(properties.getProperty("url"));
+        driver.get(properties.getProperty("url"));
+        driver.manage().window().maximize();
 	}
 	@Then("Enter the credentials and click the signin button")
 	public void enter_the_credentials_and_click_the_signin_button() {
