@@ -7,7 +7,6 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,79 +14,108 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.netty.handler.timeout.TimeoutException;
 
 public class Login {
 	WebDriver driver;
 	WebDriverWait wait;
 	Properties properties;
-
+	private Scenario scenario;
+	@Before
+    public void before(Scenario scenario) {
+        this.scenario = scenario;
+    }
 
 	@SuppressWarnings("deprecation")
 	@Given("Launch the url in Chrome")
 	public void launch_the_url_in_chrome() throws IOException {
 
-		WebDriverManager.chromedriver().setup(); // Automatically downloads and manages the WebDriver
-        ChromeOptions ch = new ChromeOptions();
-        ch.addArguments("--remote-allow-origins=*");
-       driver = new ChromeDriver(ch);
-       wait= new WebDriverWait(driver,Duration.ofSeconds(22));
+		//		WebDriverManager.chromedriver().setup(); // Automatically downloads and manages the WebDriver
+		//        ChromeOptions ch = new ChromeOptions();
+		//        ch.addArguments("--remote-allow-origins=*");
+		//       driver = new ChromeDriver(ch);
+		//       driver.manage().window().maximize();
+		//       wait= new WebDriverWait(driver,Duration.ofSeconds(22));
+		//
+		//        // Apply global implicit wait
+		//        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS); // Set your desired wait time
+		//        FileInputStream input = new FileInputStream("./File/Credentials.file");
+		//		properties = new Properties();
+		//		properties.load(input);
+		//        driver.get(properties.getProperty("url"));
 
-        // Apply global implicit wait
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS); // Set your desired wait time
-        FileInputStream input = new FileInputStream("./File/Credentials.file");
+
+
+
+
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Praveen Developer\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
+		ChromeOptions option = new ChromeOptions();
+		option.addArguments("--remote-allow-origins=*");
+		driver = new ChromeDriver(option);
+		wait = new WebDriverWait(driver, Duration.ofSeconds(22));
+		driver.manage().window().maximize();
+		FileInputStream input = new FileInputStream("C:\\Users\\Praveen Developer\\source\\repos\\ccvic\\CCVIC-Dev\\File\\Credentials.file");
 		properties = new Properties();
 		properties.load(input);
-        driver.get(properties.getProperty("url"));
-        driver.manage().window().maximize();
+
+		driver.get(properties.getProperty("url"));
+
+
+
 	}
 	@Then("Enter the credentials and click the signin button")
 	public void enter_the_credentials_and_click_the_signin_button() {
-		try {
+
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()=' Login']"))).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("logonIdentifier"))).sendKeys(properties.getProperty("username"));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("password"))).sendKeys(properties.getProperty("password"));
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("next"))).click();
-		}
-		catch(TimeoutException e) {
-			
-		}
+
+
 	}
 	@When("Click the Respond Application tab")
 	public void click_the_respond_application_tab() throws InterruptedException {
 
-
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//html")));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
-		//         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'Respond to a Subpoena/s.32C Application')]"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'Respond to a Subpoena/s.32C Application')]"))).click();
 
-		try { wait.until(ExpectedConditions.elementToBeClickable(By.
-				xpath("//*[contains(text(),'Respond to a Subpoena/s.32C Application')]"))).click();
 
-		} catch(StaleElementReferenceException ex) {
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'Respond to a Subpoena/s.32C Application')]"))).click();
-		}
-		catch(TimeoutException ex) {
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'Respond to a Subpoena/s.32C Application')]"))).click(); 
-		}
+
 
 
 	}
 	@Then("Enter the case number and click the search button and click the select button")
 	public void enter_the_case_number_and_click_the_search_button_and_click_the_select_button() {
+		
+		if(scenario.getSourceTagNames().contains("@CivilSubpoenaedNotFound")) {
 		WebElement caseSearchbox = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[text()='Enter the case number']/following::input")));
 
-		caseSearchbox.sendKeys(properties.getProperty("casenumber"));
+		caseSearchbox.sendKeys(properties.getProperty("civilcasenumber"));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Search']")));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Search']"))).click();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label/strong[text()='Respond to Subpoena']/preceding-sibling::input"))).click();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' Next ']"))).click();
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' Select ']"))).click();
+		}
+		else if(scenario.getSourceTagNames().contains("@CrimeSubpoenaedNotFound")) {
+			WebElement caseSearchbox = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[text()='Enter the case number']/following::input")));
+
+			caseSearchbox.sendKeys(properties.getProperty("crimecasenumber"));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Search']")));
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Search']"))).click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label/strong[text()='Respond to Subpoena']/preceding-sibling::input"))).click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' Next ']"))).click();
+		}
 
 	}
+
 	@Then("Upload your identity and click the declaration check box and next button")
 	public void upload_your_identity_and_click_the_declaration_check_box_and_next_button() {
 
@@ -103,7 +131,7 @@ public class Login {
 
 	@Given("select the Subpoenaed Material not found checkbox")
 	public void select_the_subpoenaed_material_not_found_checkbox() {
-	
+
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@value='432680001']"))).click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@value='Next']"))).click();
 	}
@@ -125,23 +153,50 @@ public class Login {
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("isUrgent"))).click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("date-of-order"))).click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//table/tbody/tr/td[2]/span[text()='1']"))).click();
-		
+
 	}
 
 	@Then("provide review response and click submit")
 	public void provide_review_response_and_click_submit() {
-		wait.until(ExpectedConditions.elementToBeClickable(By.name("production-date"))).click();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tbody/tr/td[2]/span[text()='1']"))).click();
+		if(scenario.getSourceTagNames().contains("@CivilSubpoenaedNotFound"))
+		{
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.name("date-of-order"))).click();
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tbody/tr/td[2]/span[text()='4']"))).click();
 
-		wait.until(ExpectedConditions.elementToBeClickable(By.name("date-of-judgement"))).click();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tbody/tr/td[2]/span[text()='1']"))).click();
-		
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("applicant-party"))).sendKeys("victoria");
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("defendant-party"))).sendKeys("victoria");
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' Submit ']"))).click();
-	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//button[text()=' Ok '])[2]")));
-	    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[text()=' Ok '])[2]"))).click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' Submit ']"))).click();
+
+			WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//button[text()=' Ok '])[2]")));
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+			while(element.isDisplayed()) {
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[text()=' Ok '])[2]"))).click();
+		}
+		}
+
+	else if(scenario.getSourceTagNames().contains("@CrimeSubpoenaedNotFound")) {
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.name("production-date"))).click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tbody/tr/td[2]/span[text()='1']"))).click();
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.name("date-of-judgement"))).click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tbody/tr/td[2]/span[text()='1']"))).click();
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("applicant-party"))).sendKeys("victoria");
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("defendant-party"))).sendKeys("victoria");
+			String element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("defendant-party"))).getText();
+			if(element!=null) {
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' Submit ']"))).click();
+			}
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//button[text()=' Ok '])[2]")));
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[text()=' Ok '])[2]"))).click();
+	 }
+	 
+
 	}
+
 
 }
