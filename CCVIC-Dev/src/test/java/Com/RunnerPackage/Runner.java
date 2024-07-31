@@ -9,7 +9,7 @@ import io.cucumber.junit.CucumberOptions;
     features = "Feature/fileadocument.feature", 
     glue = {"com.stepdefinition"}, 
     plugin = {"pretty", "html:target/cucumber-reports"},
-    tags = "@SubmitSubpoenaed"
+    tags = "@CrimeRespondTo32CApplication"
     
 )
 public class Runner {
