@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Runner" project="CCVIC-Dev" tests="1" started="1" failures="0" errors="1" ignored="0">
+  <testsuite name="Com.RunnerPackage.Runner" time="103.061">
+    <testsuite name="User Login" time="103.06">
+      <testcase name="Submit Subpoenaed Material" classname="User Login" time="103.06">
+        <error>org.openqa.selenium.remote.UnreachableBrowserException: Error communicating with the remote browser. It may have died.
+Build info: version: '4.5.0', revision: 'fe167b119a'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [8d1e5d44475051f3dd7d1bacb480c73b, findElement {using=id, value=loader}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 127.0.6533.73, chrome: {chromedriverVersion: 127.0.6533.88 (a2d0cb026721..., userDataDir: C:\Users\Dell\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53349}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:53349/devtoo..., se:cdpVersion: 127.0.6533.73, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 8d1e5d44475051f3dd7d1bacb480c73b&#13;
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:571)&#13;
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)&#13;
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)&#13;
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:365)&#13;
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:357)&#13;
+	at org.openqa.selenium.support.ui.ExpectedConditions$20.apply(ExpectedConditions.java:570)&#13;
+	at org.openqa.selenium.support.ui.ExpectedConditions$20.apply(ExpectedConditions.java:566)&#13;
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:208)&#13;
+	at com.stepdefinition.Login.click_the_respond_application_tab(Login.java:67)&#13;
+	at ✽.Click the Respond Application tab(file:///C:/Users/Dell/source/repos/CCVIC-Automation/CCVIC-Dev/Feature/fileadocument.feature:6)&#13;
+Caused by: java.io.UncheckedIOException: java.net.SocketException: Connection reset&#13;
+	at org.openqa.selenium.remote.http.netty.NettyHttpHandler.makeCall(NettyHttpHandler.java:73)&#13;
+	at org.openqa.selenium.remote.http.AddSeleniumUserAgent.lambda$apply$0(AddSeleniumUserAgent.java:42)&#13;
+	at org.openqa.selenium.remote.http.Filter.lambda$andFinally$1(Filter.java:56)&#13;
+	at org.openqa.selenium.remote.http.netty.NettyHttpHandler.execute(NettyHttpHandler.java:49)&#13;
+	at org.openqa.selenium.remote.http.AddSeleniumUserAgent.lambda$apply$0(AddSeleniumUserAgent.java:42)&#13;
+	at org.openqa.selenium.remote.http.Filter.lambda$andFinally$1(Filter.java:56)&#13;
+	at org.openqa.selenium.remote.http.netty.NettyClient.execute(NettyClient.java:99)&#13;
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:181)&#13;
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:167)&#13;
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:142)&#13;
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:547)&#13;
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)&#13;
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)&#13;
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:365)&#13;
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:357)&#13;
+	at org.openqa.selenium.support.ui.ExpectedConditions$20.apply(ExpectedConditions.java:570)&#13;
+	at org.openqa.selenium.support.ui.ExpectedConditions$20.apply(ExpectedConditions.java:566)&#13;
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:208)&#13;
+	at com.stepdefinition.Login.click_the_respond_application_tab(Login.java:67)&#13;
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)&#13;
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)&#13;
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)&#13;
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)&#13;
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)&#13;
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)&#13;
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)&#13;
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)&#13;
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:84)&#13;
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:56)&#13;
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)&#13;
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:84)&#13;
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:75)&#13;
+	at io.cucumber.junit.PickleRunners$NoStepDescriptions.lambda$run$0(PickleRunners.java:151)&#13;
+	at io.cucumber.core.runtime.CucumberExecutionContext.lambda$runTestCase$5(CucumberExecutionContext.java:130)&#13;
+	at io.cucumber.core.runtime.RethrowingThrowableCollector.executeAndThrow(RethrowingThrowableCollector.java:23)&#13;
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:130)&#13;
+	at io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:148)&#13;
+	at io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:144)&#13;
+	at io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:28)&#13;
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)&#13;
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)&#13;
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)&#13;
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)&#13;
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)&#13;
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)&#13;
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)&#13;
+	at io.cucumber.junit.FeatureRunner.run(FeatureRunner.java:137)&#13;
+	at io.cucumber.junit.Cucumber.runChild(Cucumber.java:196)&#13;
+	at io.cucumber.junit.Cucumber.runChild(Cucumber.java:89)&#13;
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)&#13;
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)&#13;
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)&#13;
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)&#13;
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)&#13;
+	at io.cucumber.junit.Cucumber$RunBeforeAllHooks.evaluate(Cucumber.java:266)&#13;
+	at io.cucumber.junit.Cucumber$RunAfterAllHooks.evaluate(Cucumber.java:281)&#13;
+	at io.cucumber.junit.Cucumber$StartTestRun.evaluate(Cucumber.java:233)&#13;
+	at io.cucumber.junit.Cucumber$FinishTestRun.evaluate(Cucumber.java:248)&#13;
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)&#13;
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)&#13;
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)&#13;
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:757)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)&#13;
+Caused by: java.net.SocketException: Connection reset&#13;
+	at java.base/sun.nio.ch.SocketChannelImpl.throwConnectionReset(SocketChannelImpl.java:401)&#13;
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:434)&#13;
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:258)&#13;
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)&#13;
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)&#13;
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)&#13;
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:722)&#13;
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:658)&#13;
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:584)&#13;
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:496)&#13;
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)&#13;
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)&#13;
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)&#13;
+	at java.base/java.lang.Thread.run(Thread.java:1583)&#13;
+&#13;
+</error>
+      </testcase>
+    </testsuite>
+  </testsuite>
+</testrun>

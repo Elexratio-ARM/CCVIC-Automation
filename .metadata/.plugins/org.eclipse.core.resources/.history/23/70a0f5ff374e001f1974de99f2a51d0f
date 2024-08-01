@@ -1,0 +1,146 @@
+package com.stepdefinition;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.time.Duration;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import io.netty.handler.timeout.TimeoutException;
+
+public class Login {
+	WebDriver driver;
+	WebDriverWait wait;
+	Properties properties;
+
+
+	@SuppressWarnings("deprecation")
+	@Given("Launch the url in Chrome")
+	public void launch_the_url_in_chrome() throws IOException {
+
+		WebDriverManager.chromedriver().setup(); // Automatically downloads and manages the WebDriver
+        ChromeOptions ch = new ChromeOptions();
+        ch.addArguments("--remote-allow-origins=*");
+       driver = new ChromeDriver(ch);
+
+        // Apply global implicit wait
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS); // Set your desired wait time
+        FileInputStream input = new FileInputStream("C:\\Users\\Praveen Developer\\source\\repos\\ccvic\\CCVIC-Dev\\File\\Credentials.file");
+		properties = new Properties();
+		properties.load(input);
+        driver.get(properties.getProperty("url"));
+        driver.manage().window().maximize();
+	}
+	@Then("Enter the credentials and click the signin button")
+	public void enter_the_credentials_and_click_the_signin_button() {
+		try {
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()=' Login']"))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("logonIdentifier"))).sendKeys(properties.getProperty("username"));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("password"))).sendKeys(properties.getProperty("password"));
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("next"))).click();
+		}
+		catch(TimeoutException e) {
+			
+		}
+	}
+	@When("Click the Respond Application tab")
+	public void click_the_respond_application_tab() throws InterruptedException {
+
+
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+		//         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'Respond to a Subpoena/s.32C Application')]"))).click();
+
+		try { wait.until(ExpectedConditions.elementToBeClickable(By.
+				xpath("//*[contains(text(),'Respond to a Subpoena/s.32C Application')]"))).click();
+
+		} catch(StaleElementReferenceException ex) {
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'Respond to a Subpoena/s.32C Application')]"))).click();
+		}
+		catch(TimeoutException ex) {
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'Respond to a Subpoena/s.32C Application')]"))).click(); 
+		}
+
+
+	}
+	@Then("Enter the case number and click the search button and click the select button")
+	public void enter_the_case_number_and_click_the_search_button_and_click_the_select_button() {
+		WebElement caseSearchbox = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[text()='Enter the case number']/following::input")));
+
+		caseSearchbox.sendKeys(properties.getProperty("casenumber"));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Search']")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Search']"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label/strong[text()='Respond to Subpoena']/preceding-sibling::input"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' Next ']"))).click();
+
+	}
+	@Then("Upload your identity and click the declaration check box and next button")
+	public void upload_your_identity_and_click_the_declaration_check_box_and_next_button() {
+
+		String ProjectPath = System.getProperty("user.dir");
+		String Filepath = ProjectPath + "/File/Get_Started_With_Smallpdf_DP6_2024.07.26.05.16.51.pdf";
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[text()=' Upload from Local Storage ']/preceding-sibling::input"))).sendKeys(Filepath);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[text()='I confirm that I have completed the ‘Declaration by Addressee’ contained in the subpoena uploaded.']/input"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' Next ']"))).click();
+
+
+	}
+
+	@Given("select the Subpoenaed Material not found checkbox")
+	public void select_the_subpoenaed_material_not_found_checkbox() {
+	
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@value='432680001']"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@value='Next']"))).click();
+	}
+
+	@Given("upload a supporting letter")
+	public void upload_a_supporting_letter() {
+		String ProjectPath = System.getProperty("user.dir");
+		String Filepath = ProjectPath + "/File/Get_Started_With_Smallpdf_DP6_2024.07.26.05.16.51.pdf";
+
+		WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[text()='Upload from Local Storage']/preceding-sibling::input")));
+		element.sendKeys(Filepath);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@value='Complete']"))).click();
+	}
+
+	@Then("click the checkbox of My submission is urgent due to an order made by the Court")
+	public void click_the_checkbox_of_my_submission_is_urgent_due_to_an_order_made_by_the_court() {
+
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("isUrgent"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("date-of-order"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//table/tbody/tr/td[2]/span[text()='1']"))).click();
+		
+	}
+
+	@Then("provide review response and click submit")
+	public void provide_review_response_and_click_submit() {
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("production-date"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tbody/tr/td[2]/span[text()='1']"))).click();
+
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("date-of-judgement"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tbody/tr/td[2]/span[text()='1']"))).click();
+		
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("applicant-party"))).sendKeys("victoria");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("defendant-party"))).sendKeys("victoria");
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' Submit ']"))).click();
+	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//button[text()=' Ok '])[2]")));
+	    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[text()=' Ok '])[2]"))).click();
+	}
+
+}
