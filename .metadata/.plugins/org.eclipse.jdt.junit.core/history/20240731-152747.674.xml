@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Runner" project="CCVIC-Dev" tests="1" started="1" failures="0" errors="1" ignored="0">
+  <testsuite name="Com.RunnerPackage.Runner" time="91.779">
+    <testsuite name="User Login" time="91.779">
+      <testcase name="Submit Subpoenaed Material" classname="User Login" time="91.779">
+        <error>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to no longer be visible: By.id: loader (tried for 22 second(s) with 500 milliseconds interval)
+Build info: version: '4.5.0', revision: 'fe167b119a'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 127.0.6533.73, chrome: {chromedriverVersion: 127.0.6533.88 (a2d0cb026721..., userDataDir: C:\Users\Dell\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53417}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:53417/devtoo..., se:cdpVersion: 127.0.6533.73, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 4dfca1f9e3eea601b8b913ce46a950e0&#13;
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:87)&#13;
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:231)&#13;
+	at com.stepdefinition.Login.upload_your_identity_and_click_the_declaration_check_box_and_next_button(Login.java:119)&#13;
+	at ✽.Upload your identity and click the declaration check box and next button(file:///C:/Users/Dell/source/repos/CCVIC-Automation/CCVIC-Dev/Feature/fileadocument.feature:56)&#13;
+&#13;
+</error>
+      </testcase>
+    </testsuite>
+  </testsuite>
+</testrun>
