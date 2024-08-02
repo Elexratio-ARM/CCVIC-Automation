@@ -6,25 +6,23 @@ Feature: User Login
     When Click the Respond Application tab
 
   @CrimeSubpoenaedNotFound
-  Scenario: Subpoenaed Material NOT Found in Respond to Subpoena
+  Scenario: Subpoenaed Material NOT Found in Respond to Subpoena using crime case number
     Then Enter the case number and click the search button and click the select button
     And Upload your identity and click the declaration check box and next button
     Given select the Responsetype
     And upload a supporting letter
-    Then click the checkbox of My submission is urgent due to an order made by the Court
     Then provide review response and click submit
 
   @CivilSubpoenaedNotFound
-  Scenario: Subpoenaed Material Not Found
+  Scenario: Subpoenaed Material Not Found using civil case number
     Then Enter the case number and click the search button and click the select button
     And Upload your identity and click the declaration check box and next button
     Given select the Responsetype
     And upload a supporting letter
-    Then click the checkbox of My submission is urgent due to an order made by the Court
     Then provide review response and click submit
 
   @CrimeObjectToComplyWithTheSubpoena
-  Scenario: Object to comply with the Subpoena in Respond to Subpoena
+  Scenario: Object to comply with the Subpoena in Respond to Subpoena using crime case number
     Then Enter the case number and click the search button and click the select button
     And Upload your identity and click the declaration check box and next button
     Given select the Responsetype
@@ -33,8 +31,8 @@ Feature: User Login
     Then provide review response and click submit
 
   @CivilObjectToComplyWithTheSubpoena
-  Scenario: Object to comply with the Subpoena
-    Then Enter the case number and click the search button and click the select button
+  Scenario: Object to comply with the Subpoena using civil case number
+    Then Enter the case number and click the search button and click the select button 
     And Upload your identity and click the declaration check box and next button
     Given select the Responsetype
     Then Select the reason for the objection
@@ -42,7 +40,7 @@ Feature: User Login
     Then provide review response and click submit
 
   @CrimeRespondTo32CApplication
-  Scenario: Respond to 32c Application
+  Scenario: Respond to 32c Application using crime case number
     Then Enter the case number and click the search button and click the select button
     And Upload your identity and click the next button
     And choose the judicial order
@@ -60,4 +58,32 @@ Feature: User Login
     When select I do not object to inspection
     And upload a supporting letter
     Then Select yes on Medical Material and click on compleate
+    Then provide review response and click submit
+    
+    @AppealSubpoenaedNotFound
+  Scenario: Subpoenaed Material NOT Found in Respond to Subpoena using appeal case number
+    Then Enter the case number and click the search button and click the select button
+    And Upload your identity and click the declaration check box and next button
+    Given select the Responsetype
+    And upload a supporting letter
+    Then provide review response and click submit
+    
+    
+      @AppealRespondTo32CApplication
+  Scenario: Respond to 32c Application using appeal case number
+    Then Enter the case number and click the search button and click the select button
+    And Upload your identity and click the next button
+    And choose the judicial order
+    Then upload the requested material
+    And upload a supporting letter
+    Then provide review response and click submit
+    
+    
+      @AppealObjectToComplyWithTheSubpoena
+  Scenario: Object to comply with the Subpoena in Respond to Subpoena using crime case number
+    Then Enter the case number and click the search button and click the select button
+    And Upload your identity and click the declaration check box and next button
+    Given select the Responsetype
+    Then Select the reason for the objection
+    And upload a supporting letter
     Then provide review response and click submit
