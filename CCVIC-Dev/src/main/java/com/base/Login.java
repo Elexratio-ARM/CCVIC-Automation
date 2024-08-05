@@ -1,4 +1,4 @@
-package com.stepdefinition;
+package com.base;
 
 import java.io.FileInputStream;
 import java.io.IOException;
