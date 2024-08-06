@@ -110,10 +110,17 @@ public class StepDefinitions extends BaseClass {
     @Then("Upload your identity and click the declaration check box and next button")
     public void upload_your_identity_and_click_the_declaration_check_box_and_next_button() throws InterruptedException {
         uploadIdentityPage.uploadFile(filePath);
-        uploadIdentityPage.clickDeclarationCheckBox();
+        if(scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterial")) 
+	    {
         uploadIdentityPage.clickNextButton();
-    }
-
+	    } 
+	    else
+	    {
+	    uploadIdentityPage.clickDeclarationCheckBox();
+        uploadIdentityPage.clickNextButton();
+	    }
+	    }
+       
     @Given("select the Responsetype")
     public void select_the_responsetype() {
         if(scenario.getSourceTagNames().contains("@CrimeSubpoenaedNotFound") || scenario.getSourceTagNames().contains("@CivilSubpoenaedNotFound") || scenario.getSourceTagNames().contains("@AppealSubpoenaedNotFound")) {

@@ -32,7 +32,7 @@ Feature: User Login
 
   @CivilObjectToComplyWithTheSubpoena
   Scenario: Object to comply with the Subpoena using civil case number
-    Then Enter the case number and click the search button and click the select button 
+    Then Enter the case number and click the search button and click the select button
     And Upload your identity and click the declaration check box and next button
     Given select the Responsetype
     Then Select the reason for the objection
@@ -59,17 +59,16 @@ Feature: User Login
     And upload a supporting letter
     Then Select yes on Medical Material and click on compleate
     Then provide review response and click submit
-    
-    @AppealSubpoenaedNotFound
+
+  @AppealSubpoenaedNotFound
   Scenario: Subpoenaed Material NOT Found in Respond to Subpoena using appeal case number
     Then Enter the case number and click the search button and click the select button
     And Upload your identity and click the declaration check box and next button
     Given select the Responsetype
     And upload a supporting letter
     Then provide review response and click submit
-    
-    
-      @AppealRespondTo32CApplication
+
+  @AppealRespondTo32CApplication
   Scenario: Respond to 32c Application using appeal case number
     Then Enter the case number and click the search button and click the select button
     And Upload your identity and click the next button
@@ -77,13 +76,21 @@ Feature: User Login
     Then upload the requested material
     And upload a supporting letter
     Then provide review response and click submit
-    
-    
-      @AppealObjectToComplyWithTheSubpoena
+
+  @AppealObjectToComplyWithTheSubpoena
   Scenario: Object to comply with the Subpoena in Respond to Subpoena using crime case number
     Then Enter the case number and click the search button and click the select button
     And Upload your identity and click the declaration check box and next button
     Given select the Responsetype
     Then Select the reason for the objection
+    And upload a supporting letter
+    Then provide review response and click submit
+
+  @CrimeSubmitSubpoenaedMaterial
+  Scenario: Submit Subpoenaed Material
+    Then Enter the case number and click the search button and click the select button
+    And Upload your identity and click the declaration check box and next button
+    And choose the judicial order
+    Then upload the requested material
     And upload a supporting letter
     Then provide review response and click submit
