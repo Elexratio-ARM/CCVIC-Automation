@@ -86,7 +86,7 @@ public class StepDefinitions extends BaseClass {
         //respond to subpoena or 32capplication for crime case
         else  if(scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("Crime")))
         {
-        	if( scenario.getSourceTagNames().contains("@CrimeSubpoenaedNotFound") || scenario.getSourceTagNames().contains("@CrimeObjectToComplyWithTheSubpoena")) 
+        	if( scenario.getSourceTagNames().contains("@CrimeSubpoenaedNotFound") || scenario.getSourceTagNames().contains("@CrimeObjectToComplyWithTheSubpoena")||scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterial")) 
         			respondApplicationPage.clickRespondToSubpoena();
         	else
         		respondApplicationPage.click32cApplication();
@@ -110,15 +110,8 @@ public class StepDefinitions extends BaseClass {
     @Then("Upload your identity and click the declaration check box and next button")
     public void upload_your_identity_and_click_the_declaration_check_box_and_next_button() throws InterruptedException {
         uploadIdentityPage.uploadFile(filePath);
-        if(scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterial")) 
-	    {
+        uploadIdentityPage.clickDeclarationCheckBox();
         uploadIdentityPage.clickNextButton();
-	    } 
-	    else
-	    {
-	    uploadIdentityPage.clickDeclarationCheckBox();
-        uploadIdentityPage.clickNextButton();
-	    }
 	    }
        
     @Given("select the Responsetype")
@@ -129,7 +122,7 @@ public class StepDefinitions extends BaseClass {
         if(scenario.getSourceTagNames().contains("@CrimeObjectToComplyWithTheSubpoena") || scenario.getSourceTagNames().contains("@CivilObjectToComplyWithTheSubpoena") || scenario.getSourceTagNames().contains("@AppealObjectToComplyWithTheSubpoena")) {
             responseTypePage.selectResponseType("432680002");
         }
-        if(scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial")) {
+        if(scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial") || scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterial")) {
             responseTypePage.selectResponseType("432680000");
         }
         responseTypePage.clickNextButton();
@@ -138,7 +131,7 @@ public class StepDefinitions extends BaseClass {
     @Given("upload a supporting letter")
     public void upload_a_supporting_letter() throws InterruptedException {
         supportingLetterPage.uploadSupportingLetter(filePath);
-        if(scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial")) {
+        if(scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial")||scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterial")) {
             supportingLetterPage.clickNextButton();
         } else {
             supportingLetterPage.clickCompleteButton();
