@@ -97,3 +97,18 @@ Feature: User Login
     And upload a supporting letter
     Then Select yes on Medical Material and click on compleate
     Then provide review response and click submit
+    
+    @CrimeSubmitSubpoenaedMaterialWithRedactedfile
+     Scenario: Submit Subpoenaed Material
+    Then Enter the case number and click the search button and click the select button
+    And Upload your identity and click the declaration check box and next button
+    Given select the Responsetype
+    Then Upload Subpoenaed Material and enter the subpoenaed Description
+   And select I do not wish to upload any redacted versions
+    When select I do not object to inspection
+    And upload a supporting letter
+    Then Select yes on Medical Material and click on compleate
+    Then provide review response and click submit
+    
+    
+    

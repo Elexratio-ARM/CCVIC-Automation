@@ -13,7 +13,8 @@ public class SupportingLetterPage {
 	private WebDriver driver;
 	private WebDriverWait wait;
 
-	private By uploadInput = By.xpath("//button[text()='Upload from Local Storage']/preceding-sibling::input");
+	//private By uploadInput = By.xpath("//button[text()='Upload from Local Storage']/preceding-sibling::input");
+	private By uploadInput = By.xpath("//input[@onclick='this.value=null;']");	
 	private By nextButton = By.xpath("//*[@value='Next']");
 	private By completeButton = By.xpath("//input[@value='Complete']");
 

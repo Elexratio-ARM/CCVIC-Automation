@@ -86,7 +86,7 @@ public class StepDefinitions extends BaseClass {
         //respond to subpoena or 32capplication for crime case
         else  if(scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("Crime")))
         {
-        	if( scenario.getSourceTagNames().contains("@CrimeSubpoenaedNotFound") || scenario.getSourceTagNames().contains("@CrimeObjectToComplyWithTheSubpoena")||scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterial")) 
+        	if( scenario.getSourceTagNames().contains("@CrimeSubpoenaedNotFound") || scenario.getSourceTagNames().contains("@CrimeObjectToComplyWithTheSubpoena")||scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterial")||scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterialWithRedactedfile")) 
         			respondApplicationPage.clickRespondToSubpoena();
         	else
         		respondApplicationPage.click32cApplication();
@@ -122,7 +122,7 @@ public class StepDefinitions extends BaseClass {
         if(scenario.getSourceTagNames().contains("@CrimeObjectToComplyWithTheSubpoena") || scenario.getSourceTagNames().contains("@CivilObjectToComplyWithTheSubpoena") || scenario.getSourceTagNames().contains("@AppealObjectToComplyWithTheSubpoena")) {
             responseTypePage.selectResponseType("432680002");
         }
-        if(scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial") || scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterial")) {
+        if(scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial") || scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterial")|| scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterialWithRedactedfile")) {
             responseTypePage.selectResponseType("432680000");
         }
         responseTypePage.clickNextButton();
@@ -131,7 +131,7 @@ public class StepDefinitions extends BaseClass {
     @Given("upload a supporting letter")
     public void upload_a_supporting_letter() throws InterruptedException {
         supportingLetterPage.uploadSupportingLetter(filePath);
-        if(scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial")||scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterial")) {
+        if(scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial")||scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterial")||scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterialWithRedactedfile")) {
             supportingLetterPage.clickNextButton();
         } else {
             supportingLetterPage.clickCompleteButton();
@@ -177,15 +177,39 @@ public class StepDefinitions extends BaseClass {
     }
 
     @Then("select I do not wish to upload any redacted versions")
-    public void select_i_do_not_wish_to_upload_any_redacted_versions() {
+    public void select_i_do_not_wish_to_upload_any_redacted_versions() throws InterruptedException {
+    	
+    	if ((scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterialWithRedactedfile")))	
+    	{
+    		uploadMaterialPage.uploadRedactedfile(filePath);
+    		uploadMaterialPage.clickRedactedfiledescription();
+    		uploadMaterialPage.clickNextButton();
+    		
+    		   		
+    	}
+    	else
+    	{
         uploadMaterialPage.selectNoRedactedVersions();
         uploadMaterialPage.clickNextButton();
+    	}
     }
 
     @When("select I do not object to inspection")
     public void select_i_do_not_object_to_inspection() {
+    	if((scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterialWithRedactedfile")))
+    	{
+    		uploadMaterialPage.clickObjectionCheck();
+    		uploadMaterialPage.clickNextButton();
+    		uploadMaterialPage.clickobjectionreasonDPD();
+    		uploadMaterialPage.clickobjectionreasonDPDOP1();
+    		uploadMaterialPage.clickNextButton();
+    		
+    	}
+    	else
+    	{
         uploadMaterialPage.selectNoObjectionToInspection();
         uploadMaterialPage.clickNextButton();
+    	}
     }
 
     @Then("Select yes on Medical Material and click on compleate")

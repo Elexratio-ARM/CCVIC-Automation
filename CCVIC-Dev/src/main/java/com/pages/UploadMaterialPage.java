@@ -19,7 +19,13 @@ public class UploadMaterialPage {
     private By completeButton = By.xpath("//input[@value='Complete']");
     private By objectionCheckbox = By.xpath("//input[@name='confirmObjection']");
     private By medicalYesMaterial = By.xpath("//input[@id='sq_119i_0']");
-
+    private By Redactedfile  = By.xpath("//input[@onclick='this.value=null']");
+    private By Redactedfiledescription  = By.xpath("(//input[@maxlength=\"100\"])[2]");
+    private By ObjectionCheck  = By.xpath("(//input[@type=\"checkbox\"])[4]");
+    private By objectionreasonDPD  = By.xpath("//*[@id='sq_113i']");
+    private By objectionreasonDPDOP1  = By.xpath("//option[contains(text(),'The subpoena is too vague and/or broad')]");
+    
+    
     public UploadMaterialPage(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
         this.wait = wait;
@@ -30,9 +36,26 @@ public class UploadMaterialPage {
         element.sendKeys(filePath);
         TimeUnit.SECONDS.sleep(3);
     }
+    public void uploadRedactedfile(String filePath) throws InterruptedException {
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(Redactedfile));
+        element.sendKeys(filePath);
+        TimeUnit.SECONDS.sleep(3);
+    }
 
     public void clickNextButton() {
         wait.until(ExpectedConditions.elementToBeClickable(nextButton)).click();
+    }
+    public void clickobjectionreasonDPDOP1() {
+        wait.until(ExpectedConditions.elementToBeClickable(objectionreasonDPDOP1)).click();
+    }
+    public void clickobjectionreasonDPD() {
+        wait.until(ExpectedConditions.elementToBeClickable(objectionreasonDPD)).click();
+    }
+    public void clickObjectionCheck() {
+        wait.until(ExpectedConditions.elementToBeClickable(ObjectionCheck)).click();
+    }
+    public void clickRedactedfiledescription() {
+        wait.until(ExpectedConditions.elementToBeClickable(Redactedfiledescription)).sendKeys("TEST Description");
     }
 
     public void clickCompleteButton() {
