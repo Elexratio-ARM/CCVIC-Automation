@@ -1,12 +1,16 @@
 package com.pages;
-
+ 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
-
+ 
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import io.netty.handler.timeout.TimeoutException;
 
 public class RespondApplicationPage {
     private WebDriver driver;
@@ -53,5 +57,18 @@ public class RespondApplicationPage {
 
 		wait.until(ExpectedConditions.elementToBeClickable(application32c)).click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' Next ']"))).click();
+    }
+    public boolean check() {
+    	WebDriverWait sleep = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            WebElement element = sleep.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()=' Please select ']")));
+            return element.isDisplayed();
+        } catch (TimeoutException e) {
+      
+        	return false;
+        } catch (Exception e) {
+     
+        	return false;
+        }
     }
 }

@@ -38,7 +38,7 @@ public class StepDefinitions extends BaseClass {
     private JudicialOrderPage judicialOrderPage;
     private UploadMaterialPage uploadMaterialPage;
     private String filePath = projectPath + "/File/Get_Started_With_Smallpdf_DP6_2024.07.26.05.16.51.pdf";
-
+    private boolean test;
     @Before
     public void before(Scenario scenario) {
         this.scenario = scenario;
@@ -81,8 +81,17 @@ public class StepDefinitions extends BaseClass {
                         properties.getProperty("crimecasenumber") : properties.getProperty("civilcasenumber"));
         respondApplicationPage.enterCaseNumber(caseNumber);
         respondApplicationPage.clickSearchButton();
-        if(scenario.getSourceTagNames().contains("@CivilSubpoenaedNotFound")||scenario.getSourceTagNames().contains("@CivilObjectToComplyWithTheSubpoena")||scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial"))
-        	respondApplicationPage.clickSelectButton();
+        if(respondApplicationPage.check()==false &( scenario.getSourceTagNames().contains("@CivilSubpoenaedNotFound")||scenario.getSourceTagNames().contains("@CivilObjectToComplyWithTheSubpoena")||scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial")))
+    	{respondApplicationPage.clickSelectButton();
+          test=true;
+    	}
+    else  if(scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("Civil"))&respondApplicationPage.check()==true)
+        {    test = false;
+        	if( scenario.getSourceTagNames().contains("@CivilSubpoenaedNotFound") || scenario.getSourceTagNames().contains("@CivilObjectToComplyWithTheSubpoena")) 
+        			respondApplicationPage.clickRespondToSubpoena();
+        	else
+        		respondApplicationPage.click32cApplication();
+        }
         //respond to subpoena or 32capplication for crime case
         else  if(scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("Crime")))
         {
@@ -140,7 +149,7 @@ public class StepDefinitions extends BaseClass {
 
     @Then("provide review response and click submit")
     public void provide_review_response_and_click_submit() throws InterruptedException {
-        reviewResponsePage.reviewResponse(scenario, properties);
+        reviewResponsePage.reviewResponse(scenario, properties,test);
         TimeUnit.SECONDS.sleep(5);
         quitDriver();
     }
