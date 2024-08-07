@@ -27,35 +27,14 @@ public class ReviewResponsePage {
 				|| scenario.getSourceTagNames().contains("@CivilObjectToComplyWithTheSubpoena"))) {
 			submitResponse();
 		}
-		else if (scenario.getSourceTagNames().contains("@CrimeSubpoenaedNotFound")
-				|| scenario.getSourceTagNames().contains("@CrimeObjectToComplyWithTheSubpoena")
-				|| scenario.getSourceTagNames().contains("@CrimeRespondTo32CApplication")
-				||scenario.getSourceTagNames().contains("@AppealSubpoenaedNotFound") 
-				|| scenario.getSourceTagNames().contains("@AppealObjectToComplyWithTheSubpoena")
-				|| scenario.getSourceTagNames().contains("@AppealRespondTo32CApplication")
-				||(check==false&(scenario.getSourceTagNames().contains("@CivilSubpoenaedNotFound") 
-			    || scenario.getSourceTagNames().contains("@CivilObjectToComplyWithTheSubpoena")
-			    ||scenario.getSourceTagNames().contains("@CivilRespondTo32CApplication"))))
+		else if (scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("Crime"))
+				||scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("Appeal"))
+				||(check==false&(scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("Civil"))))) 
+
 		{
-			if (scenario.getSourceTagNames().contains("@CrimeSubpoenaedNotFound") 
-					|| scenario.getSourceTagNames().contains("@CrimeObjectToComplyWithTheSubpoena")
-					||scenario.getSourceTagNames().contains("@AppealSubpoenaedNotFound") 
-					|| scenario.getSourceTagNames().contains("@AppealObjectToComplyWithTheSubpoena")
-					||scenario.getSourceTagNames().contains("@CivilSubpoenaedNotFound") 
-				    || scenario.getSourceTagNames().contains("@CivilObjectToComplyWithTheSubpoena"))
-			{
 
-               if(check==false)
-               { 
-            	   subpoenaType();
-               }
-				wait.until(ExpectedConditions.elementToBeClickable(By.name("production-date"))).click();
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tbody/tr/td[2]/span[text()='5']"))).click();
 
-				wait.until(ExpectedConditions.elementToBeClickable(By.name("date-of-judgement"))).click();
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='owl-dt-calendar-cell-content owl-dt-calendar-cell-today']"))).click();
-			}
-			else if (scenario.getSourceTagNames().contains("@CrimeRespondTo32CApplication")
+			if (scenario.getSourceTagNames().contains("@CrimeRespondTo32CApplication")
 					|| scenario.getSourceTagNames().contains("@AppealRespondTo32CApplication")
 					||(scenario.getSourceTagNames().contains("@CivilRespondTo32CApplication")&check==false))
 			{
@@ -63,11 +42,26 @@ public class ReviewResponsePage {
 				TimeUnit.SECONDS.sleep(3);
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='owl-dt-calendar-cell-content owl-dt-calendar-cell-today']"))).click();
 			}
+			else
+			{
+
+				if(check==false)
+				{ 
+					subpoenaType();
+				}
+				wait.until(ExpectedConditions.elementToBeClickable(By.name("production-date"))).click();
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='owl-dt-calendar-cell-content owl-dt-calendar-cell-today']"))).click();
+
+				wait.until(ExpectedConditions.elementToBeClickable(By.name("date-of-judgement"))).click();
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='owl-dt-calendar-cell-content owl-dt-calendar-cell-today']"))).click();
+			}
+
 			TimeUnit.SECONDS.sleep(3);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("applicant-party"))).sendKeys("victoria");
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("defendant-party"))).sendKeys("victoria");
 			submitResponse();
-		} else if (scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial")) {
+		} 
+		else if (scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial")) {
 			submitResponse();
 		}
 
@@ -79,6 +73,7 @@ public class ReviewResponsePage {
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' Submit ']"))).click();
 		TimeUnit.SECONDS.sleep(10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//html")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[text()=' Ok '])[2]"))).click();
 	}
 	private void subpoenaType()

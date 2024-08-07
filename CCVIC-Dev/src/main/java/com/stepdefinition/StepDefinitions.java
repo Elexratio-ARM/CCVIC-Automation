@@ -87,7 +87,7 @@ public class StepDefinitions extends BaseClass {
     	}
     else  if(scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("Civil"))&respondApplicationPage.check()==true)
         {    test = false;
-        	if( scenario.getSourceTagNames().contains("@CivilSubpoenaedNotFound") || scenario.getSourceTagNames().contains("@CivilObjectToComplyWithTheSubpoena")) 
+        	if( scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial") || scenario.getSourceTagNames().contains("@CivilSubpoenaedNotFound") ||scenario.getSourceTagNames().contains("@CivilObjectToComplyWithTheSubpoena")) 
         			respondApplicationPage.clickRespondToSubpoena();
         	else
         		respondApplicationPage.click32cApplication();
@@ -105,7 +105,7 @@ public class StepDefinitions extends BaseClass {
       //respond to subpoena or 32capplication for Appeal case
         else if (scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("Appeal"))) 
         {
-        	if(scenario.getSourceTagNames().contains("@AppealSubpoenaedNotFound") || scenario.getSourceTagNames().contains("@AppealObjectToComplyWithTheSubpoena"))
+        	if(scenario.getSourceTagNames().contains("@AppealSubmitSubpoenaedMaterial") ||scenario.getSourceTagNames().contains("@AppealSubpoenaedNotFound") || scenario.getSourceTagNames().contains("@AppealObjectToComplyWithTheSubpoena"))
         		respondApplicationPage.clickRespondToSubpoena();
         	else
         		respondApplicationPage.click32cApplication();
@@ -131,7 +131,7 @@ public class StepDefinitions extends BaseClass {
         if(scenario.getSourceTagNames().contains("@CrimeObjectToComplyWithTheSubpoena") || scenario.getSourceTagNames().contains("@CivilObjectToComplyWithTheSubpoena") || scenario.getSourceTagNames().contains("@AppealObjectToComplyWithTheSubpoena")) {
             responseTypePage.selectResponseType("432680002");
         }
-        if(scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial") || scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterial")|| scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterialWithRedactedfile")) {
+        if(scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial")||scenario.getSourceTagNames().contains("@AppealSubmitSubpoenaedMaterial") || scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterial")|| scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterialWithRedactedfile")) {
             responseTypePage.selectResponseType("432680000");
         }
         responseTypePage.clickNextButton();
@@ -140,7 +140,7 @@ public class StepDefinitions extends BaseClass {
     @Given("upload a supporting letter")
     public void upload_a_supporting_letter() throws InterruptedException {
         supportingLetterPage.uploadSupportingLetter(filePath);
-        if(scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial")||scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterial")||scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterialWithRedactedfile")) {
+        if(scenario.getSourceTagNames().contains("@CivilSubmitSubpoenaedMaterial")||scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterial")||scenario.getSourceTagNames().contains("@CrimeSubmitSubpoenaedMaterialWithRedactedfile")||scenario.getSourceTagNames().contains("@AppealSubmitSubpoenaedMaterial")) {
             supportingLetterPage.clickNextButton();
         } else {
             supportingLetterPage.clickCompleteButton();

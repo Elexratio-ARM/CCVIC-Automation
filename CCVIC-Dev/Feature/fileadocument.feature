@@ -97,18 +97,35 @@ Feature: User Login
     And upload a supporting letter
     Then Select yes on Medical Material and click on compleate
     Then provide review response and click submit
-    
-    @SubmitSubpoenaedMaterialWithRedactedfiledescription
-     Scenario: Submit Subpoenaed Material
+
+@CrimeSubmitSubpoenaedMaterialWithRedactedfile
+  Scenario: Submit Subpoenaed Material
     Then Enter the case number and click the search button and click the select button
     And Upload your identity and click the declaration check box and next button
     Given select the Responsetype
     Then Upload Subpoenaed Material and enter the subpoenaed Description
-    And Upload redacted file and provide description
+     And select I do not wish to upload any redacted versions
     When select I do not object to inspection
     And upload a supporting letter
     Then Select yes on Medical Material and click on compleate
     Then provide review response and click submit
-    
-    
-    
+  @CivilRespondTo32CApplication
+  Scenario: Respond to 32c Application using civil case number
+    Then Enter the case number and click the search button and click the select button
+    And Upload your identity and click the next button
+    And choose the judicial order
+    Then upload the requested material
+    And upload a supporting letter
+    Then provide review response and click submit
+
+  @AppealSubmitSubpoenaedMaterial
+  Scenario: Submit Subpoenaed Material
+    Then Enter the case number and click the search button and click the select button
+    And Upload your identity and click the declaration check box and next button
+    Given select the Responsetype
+    Then Upload Subpoenaed Material and enter the subpoenaed Description
+    And select I do not wish to upload any redacted versions
+    When select I do not object to inspection
+    And upload a supporting letter
+    Then Select yes on Medical Material and click on compleate
+    Then provide review response and click submit
