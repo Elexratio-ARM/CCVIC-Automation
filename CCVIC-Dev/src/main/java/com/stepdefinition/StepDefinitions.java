@@ -1,6 +1,7 @@
 package com.stepdefinition;
 
 import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -9,18 +10,21 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.base.BaseClass;
+import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.pages.LoginPage;
 import com.pages.RespondApplicationPage;
 import com.pages.UploadIdentityPage;
 import com.pages.ResponseTypePage;
 import com.pages.SupportingLetterPage;
 import com.pages.ReviewResponsePage;
+import com.pages.FileDocumentPage;
 import com.pages.ObjectionPage;
 import com.pages.JudicialOrderPage;
 import com.pages.UploadMaterialPage;
-
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.But;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -37,11 +41,13 @@ public class StepDefinitions extends BaseClass {
     private ObjectionPage objectionPage;
     private JudicialOrderPage judicialOrderPage;
     private UploadMaterialPage uploadMaterialPage;
+    private FileDocumentPage fileDocumentPage;
     private String filePath = projectPath + "/File/Get_Started_With_Smallpdf_DP6_2024.07.26.05.16.51.pdf";
     private boolean test;
     @Before
     public void before(Scenario scenario) {
         this.scenario = scenario;
+        
     }
 
     @Given("Launch the url in Chrome")
@@ -56,6 +62,7 @@ public class StepDefinitions extends BaseClass {
         objectionPage = new ObjectionPage(driver, wait);
         judicialOrderPage = new JudicialOrderPage(driver, wait);
         uploadMaterialPage = new UploadMaterialPage(driver, wait);
+        fileDocumentPage = new FileDocumentPage(driver, wait);
         driver.get(properties.getProperty("url"));
     }
 
@@ -226,4 +233,117 @@ public class StepDefinitions extends BaseClass {
     	uploadMaterialPage.selectYesOnMedicalMaterial();
         uploadMaterialPage.clickCompleteButton();
     }
+    @When("click on File storage dropdown and click on upload")
+	public void click_on_File_storage_dropdown_and_click_on_upload() {
+		uploadMaterialPage.Waitloader();
+
+		uploadMaterialPage.clickFileStorage();
+		uploadMaterialPage.clickUploadfile();
+
+
+	}
+
+	@Then("Upload file from local storage")
+	public void upload_file_from_local_storage() throws InterruptedException {
+
+		uploadMaterialPage.uploadFileupload(filePath);
+		uploadMaterialPage.clickCloseicon();
+
+	}
+	@When("select case number")
+	public void select_case_number() {
+		fileDocumentPage.clickCaseNoPo1();
+	}
+
+	@Then("Click on file a document")
+	public void click_on_file_a_document() {
+		uploadMaterialPage.Waitloader();
+		fileDocumentPage.clickFileAdocument();
+	}
+
+	@And("upload file on the choose file option")
+	public void upload_file_on_the_choose_file_option() throws InterruptedException {
+		fileDocumentPage.uploadChooseFile(filePath);
+	}
+
+	@Then("Select document type and provide document name")
+	public void select_document_type_and_provide_document_name() {
+		uploadMaterialPage.Waitloader();
+		fileDocumentPage.clickCoverletterOP();
+		if ((scenario.getSourceTagNames().contains(" @FileADocumentCoverletter")))
+		{
+			fileDocumentPage.clickCoverletterOP();
+		}
+		else if((scenario.getSourceTagNames().contains("@FileADocumentObjection"))){
+			fileDocumentPage.clickObjectionop();
+		}
+		else if((scenario.getSourceTagNames().contains("@FileADocumentSubpoenaMaterial"))){
+			fileDocumentPage.clickSubpoenaMaterialOP();
+		}
+		else if((scenario.getSourceTagNames().contains("@FileADocumentWithdrawal"))){
+			fileDocumentPage.clickWithdrawalop();
+		}
+
+		fileDocumentPage.clickDocumentName();
+	}
+
+	@But("Select medical materials and click on submit")
+	public void select_medical_materials_and_click_on_submit() {
+		fileDocumentPage.clickMedicRadio();
+		fileDocumentPage.clickSubmit();
+		fileDocumentPage.clickOk();
+	}
+	@When("navigate to inspection and click on inspection")
+	public void navigate_to_inspection_and_click_on_inspection() throws InterruptedException {
+		TimeUnit.SECONDS.sleep(10);
+		uploadMaterialPage.Waitloader();
+		fileDocumentPage.clickInspectSidemenu();
+		fileDocumentPage.clickRequestInspection();
+
+	}
+	@Then("Enter the case the number and click on search")
+	public void enter_case_number_and_click_search() {
+		String number = properties.getProperty("Inspectcasenumber");
+		fileDocumentPage.enterCaseNumber(number);
+		fileDocumentPage.clickSubmitCN();
+	}
+
+	@Then("Select the Subpoena check box and click on inspect")
+	public void select_subpoena_checkbox_and_click_inspect() {
+		fileDocumentPage.clickSubpoenaCheckbox();
+		fileDocumentPage.clickInspect();
+
+	}
+
+	@When("Provide Additional information and Select the i agree check box")
+	public void provide_additional_information_and_select_i_agree_checkbox() {
+		fileDocumentPage.enterAdditionalInformation("Test information");
+		fileDocumentPage.clickIAgreeCheck();
+	}
+
+	@Then("Select My inspection is urgent and provide date of order made")
+	public void select_urgent_and_provide_date_of_order_made() {
+		fileDocumentPage.clickUrgentCheck();
+		fileDocumentPage.clickDateOfOrder();
+		fileDocumentPage.selectTodayDate();
+
+
+	}
+
+	@Then("click on Submit and click on ok on the confirmation pop-up")
+	public void click_on_submit_and_confirmation_ok() throws InterruptedException {
+		fileDocumentPage.clickSubmitInspection();
+		fileDocumentPage.clickConfirmationOK();
+
+	}
+	  @Then("Navigate to Responses from other")
+	    public void navigate_to_responses_from_other() throws InterruptedException {
+		  TimeUnit.SECONDS.sleep(10);
+			uploadMaterialPage.Waitloader();
+			fileDocumentPage.clickResponsesfromotherPage();
+			
+	  }
+
 }
+
+

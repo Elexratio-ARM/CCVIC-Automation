@@ -24,7 +24,11 @@ public class UploadMaterialPage {
     private By ObjectionCheck  = By.xpath("(//input[@type=\"checkbox\"])[4]");
     private By objectionreasonDPD  = By.xpath("//*[@id='sq_113i']");
     private By objectionreasonDPDOP1  = By.xpath("//option[contains(text(),'The subpoena is too vague and/or broad')]");
-    
+    private By FileStorage  = By.xpath("//a[contains(text(),'File Storage ')]");
+	private By Uploadfile   = By.xpath("(//*[@class='links'])[1]");
+	private By Fileupload   = By.xpath("//*[@onclick='this.value = null']");
+	private By Closeicon   = By.xpath("(//button[@class=\"close\" ])[2]");
+	private By loder       = By.id("loader");
     
     public UploadMaterialPage(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
@@ -41,7 +45,23 @@ public class UploadMaterialPage {
         element.sendKeys(filePath);
         TimeUnit.SECONDS.sleep(3);
     }
-
+    public void Waitloader() {
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(loder));
+	}
+	public void clickCloseicon() {
+		wait.until(ExpectedConditions.elementToBeClickable(Closeicon)).click();
+	}
+	public void clickUploadfile() {
+		wait.until(ExpectedConditions.elementToBeClickable(Uploadfile)).click();
+	}
+	public void clickFileStorage() {
+		wait.until(ExpectedConditions.elementToBeClickable(FileStorage)).click();
+	}
+    public void uploadFileupload(String filePath) throws InterruptedException {
+		WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(Fileupload));
+		element.sendKeys(filePath);
+		TimeUnit.SECONDS.sleep(3);
+	}
     public void clickNextButton() {
         wait.until(ExpectedConditions.elementToBeClickable(nextButton)).click();
     }
