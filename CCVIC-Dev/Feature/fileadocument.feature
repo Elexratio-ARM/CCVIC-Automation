@@ -54,15 +54,7 @@ Feature: User Login
     And upload a supporting letter
     Then provide review response and click submit
 
-  @CrimeSubpoenaedNotFound
-  Scenario: Subpoenaed Material NOT Found in Respond to Subpoena using crime case number
-    When Click the Respond Application tab
-    When Click the Respond Application tab
-    Then Enter the case number and click the search button and click the select button
-    And Upload your identity and click the declaration check box and next button
-    Given select the Responsetype
-    And upload a supporting letter
-    Then provide review response and click submit
+
 
   @CrimeObjectToComplyWithTheSubpoena
   Scenario: Object to comply with the Subpoena in Respond to Subpoena using crime case number
@@ -226,11 +218,12 @@ Feature: User Login
     Then Select document type and provide document name
     But Select medical materials and click on submit
 
-  #@FileStorageUploadCheck
-  #Scenario: Upload file on file storage and check the the fiels get populated on the manage files
-  #When click on File storage dropdown and click on upload
-  #Then Upload file from local storage
-  #And Navigate to file storage, Cofirm the uploaded file is available
+  @FileStorageUploadCheck
+  Scenario: Upload file on file storage and check the the fiels get populated on the manage files
+  When click on File storage dropdown and click on upload
+  Then Upload file from local storage
+  And Navigate to file storage
+  
   @CasePartyObjection
   Scenario: File an Objection
     Given navigate to the case party objection
@@ -240,3 +233,5 @@ Feature: User Login
     And select the reason for objection
     And select the I am lodging my objection on the correct subpoena checkbox
     And click the submit button and ok button
+
+    

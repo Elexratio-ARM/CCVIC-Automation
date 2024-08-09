@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.cucumber.java.After;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
@@ -17,7 +18,7 @@ public class BaseClass {
     protected WebDriverWait wait;
     protected Properties properties;
     protected String projectPath = System.getProperty("user.dir");
-
+    
     public void initializeDriver() throws IOException {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
@@ -29,10 +30,6 @@ public class BaseClass {
         properties = new Properties();
         properties.load(new FileInputStream(projectPath + "/File/Credentials.file"));
     }
-
-    public void quitDriver() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+    
+    
 }

@@ -48,20 +48,8 @@ public class UploadMaterialPage {
     public void Waitloader() {
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(loder));
 	}
-	public void clickCloseicon() {
-		wait.until(ExpectedConditions.elementToBeClickable(Closeicon)).click();
-	}
-	public void clickUploadfile() {
-		wait.until(ExpectedConditions.elementToBeClickable(Uploadfile)).click();
-	}
-	public void clickFileStorage() {
-		wait.until(ExpectedConditions.elementToBeClickable(FileStorage)).click();
-	}
-    public void uploadFileupload(String filePath) throws InterruptedException {
-		WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(Fileupload));
-		element.sendKeys(filePath);
-		TimeUnit.SECONDS.sleep(3);
-	}
+	
+
     public void clickNextButton() {
         wait.until(ExpectedConditions.elementToBeClickable(nextButton)).click();
     }
