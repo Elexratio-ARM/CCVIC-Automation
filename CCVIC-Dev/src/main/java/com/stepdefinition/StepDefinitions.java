@@ -10,6 +10,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.base.BaseClass;
+import com.caseparty.pages.CasePartyObjectionPage;
+
+import com.caseparty.pages.NavigateObjectionPage;
+
+import com.github.dockerjava.api.model.Driver;
 import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.pages.LoginPage;
 import com.pages.RespondApplicationPage;
@@ -41,6 +46,11 @@ public class StepDefinitions extends BaseClass {
     private ObjectionPage objectionPage;
     private JudicialOrderPage judicialOrderPage;
     private UploadMaterialPage uploadMaterialPage;
+    //casepartyobjections
+
+    private NavigateObjectionPage navigateObjectionPage;
+
+    private CasePartyObjectionPage casePartyObjectionPage;
     private FileDocumentPage fileDocumentPage;
     private String filePath = projectPath + "/File/Get_Started_With_Smallpdf_DP6_2024.07.26.05.16.51.pdf";
     private boolean test;
@@ -63,6 +73,11 @@ public class StepDefinitions extends BaseClass {
         judicialOrderPage = new JudicialOrderPage(driver, wait);
         uploadMaterialPage = new UploadMaterialPage(driver, wait);
         fileDocumentPage = new FileDocumentPage(driver, wait);
+        //caseparty objection
+
+        navigateObjectionPage = new NavigateObjectionPage(wait, driver);
+
+        casePartyObjectionPage = new CasePartyObjectionPage(wait, driver);
         driver.get(properties.getProperty("url"));
     }
 
@@ -343,6 +358,73 @@ public class StepDefinitions extends BaseClass {
 			fileDocumentPage.clickResponsesfromotherPage();
 			
 	  }
+	   @Given("navigate to the case party objection")
+
+	    public void navigate_to_the_case_party_objection() {
+
+	       navigateObjectionPage.clickCasePartyObjections();
+
+	    }
+
+	    @When("select the File an objection tab is select")
+
+	    public void select_the_file_an_objection_tab_is_select() {
+
+	      casePartyObjectionPage.clickFileObjectionTab();
+
+	    }
+
+	    @Then("enter the case number for objection and click the search button")
+
+	    public void enter_the_case_number_for_objection_and_click_the_search_button() {
+
+	        String caseNumber = properties.getProperty("Objectioncasenumber");
+
+	        casePartyObjectionPage.enterCaseNumber(caseNumber);
+
+	        casePartyObjectionPage.clickSearchButton();
+
+	    }
+
+	    @And("click the select button upload a supporting letter")
+
+	    public void click_the_select_button_upload_a_supporting_letter() throws InterruptedException {
+
+	    	casePartyObjectionPage.clickSelectButton();
+
+	    	casePartyObjectionPage.uploadSupportingLetter(filePath);
+
+	    }
+
+	    @And("select the reason for objection")
+
+	    public void select_the_reason_for_objection() {
+
+	        casePartyObjectionPage.objectionReason();
+
+	        
+
+	    }
+
+	    @And("select the I am lodging my objection on the correct subpoena checkbox")
+
+	    public void select_the_i_am_lodging_my_objection_on_the_correct_subpoena_checkbox() {
+
+	       casePartyObjectionPage.checkbox();
+
+	    }
+
+	    @And("click the submit button and ok button")
+
+	    public void click_the_submit_button_and_ok_button() throws InterruptedException {
+
+	      casePartyObjectionPage.submit();
+
+	      quitDriver();	
+
+	    }
+
+	    
 
 }
 
