@@ -89,11 +89,11 @@
       <version>1.11.0</version>
       <scope>runtime</scope>
     </dependency>
-    <dependency>
+    <!--<dependency>
     	<groupId>newproject</groupId>
     	<artifactId>buildnew</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
-    </dependency>
+    </dependency>-->
    </dependencies>
   
   <build>
