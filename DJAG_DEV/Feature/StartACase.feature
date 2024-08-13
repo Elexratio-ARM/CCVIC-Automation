@@ -14,4 +14,8 @@ Feature: User Login
     But Select next on the Checklist page
     When Provide Claim information
     Then Enter the amount and interest claiming
-    And select yes on claim any other costs and click on next
+    And select No on claim any other costs and click on next
+    When select yes on  claim settled by Counsel and Enter one fact for claim
+    Then Enter  relief being claimed and click on next 
+    And select yes on Plaintiff legally represented and provide the Plaintiff infomartion 
+    

@@ -3,6 +3,7 @@ package com.stepdefinitions;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.PageFactory;
 
 import com.base.base;
@@ -75,32 +76,59 @@ public class StepDefinitions extends base {
 		clickElement(FormTypedropdown);
 		clickElement(GuidedForm);
 		clickElement(Proceed);
-		
+
 	}
 
 	@Then("Select next on the Checklist page")
 	public void select_next_on_the_checklist_page() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		clickElement(ChecklistNext);
 	}
 
 	@When("Provide Claim information")
 	public void provide_claim_information() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		clickElement(creditcardcheckbox);
+		clickElement(YES1);
+		clickElement(No2);
+		sendKeysToElement(Fromdate, ("2023-08-15"));
+		Fromdate.sendKeys(Keys.TAB);
+		sendKeysToElement(Fromdate, ("2023"));
+		sendKeysToElement(TODate, ("2023-08-15"));
+		TODate.sendKeys(Keys.TAB);
+		sendKeysToElement(TODate, ("2023"));
+		sendKeysToElement(Suburb,("Sunny Banks"));
 	}
 
 	@Then("Enter the amount and interest claiming")
 	public void enter_the_amount_and_interest_claiming() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		sendKeysToElement(claiming1,("200"));
+		sendKeysToElement(claiming2,("200"));
 	}
 
-	@Then("select yes on claim any other costs and click on next")
-	public void select_yes_on_claim_any_other_costs_and_click_on_next() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	@Then("select No on claim any other costs and click on next")
+	public void select_no_on_claim_any_other_costs_and_click_on_next() {
+		clickElement(Yes3);
+		clickElement(No4);
+		clickElement(next);
 	}
+	@When("select yes on  claim settled by Counsel and Enter one fact for claim")
+	public void select_yes_on_claim_settled_by_counsel_and_enter_one_fact_for_claim() {
+		clickElement(No);
+		sendKeysToElement(ClaimPact,("Test Pact"));
+		clickElement(next);
+	}
+
+	@Then("Enter  relief being claimed and click on next")
+	public void enter_relief_being_claimed_and_click_on_next() {
+		sendKeysToElement(ClaimPact,("Test Pact"));
+		clickElement(next);   
+	}
+	@Then("select yes on Plaintiff legally represented and provide the Plaintiff infomartion")
+	public void select_yes_on_plaintiff_legally_represented_and_provide_the_plaintiff_infomartion() {
+		clickElement(YES1);
+		clickElement(YES2);
+		
+	}
+
 
 
 }
