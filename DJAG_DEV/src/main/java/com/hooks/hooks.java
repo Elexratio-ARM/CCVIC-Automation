@@ -194,7 +194,11 @@ public class hooks {
 	@FindBy(xpath = "(//input[@class='ant-input'])[5]")
 
 	public static WebElement address;
+	
+	@FindBy(xpath = "(//input[@class='ant-input'])[4]")
 
+	public static WebElement address4;
+	
 	@FindBy(xpath = "(//input[@class='ant-input'])[8]")
 
 	public static WebElement suburb;
@@ -267,6 +271,65 @@ public class hooks {
 	@FindBy(xpath = "//input[@id='txtinputbrfdyn_AgentFamilyName']")
 
 	public static WebElement LPeLname ;
+	
+	@FindBy(xpath = "//div[contains(text(),'Queensland Civil and Administrative Tribunal')]")
+
+	public static WebElement QCAT ;
+	
+	@FindBy(xpath = "//div[contains(text(),'Residential tenancy disputes')]")
+
+	public static WebElement RTD ;
+	
+	@FindBy(xpath = "//span[contains(text(),'Tenant')]")
+
+	public static WebElement Tenant ;
+	
+	@FindBy(xpath = "(//button[@tabindex='-1\'])[1]")
+	public static WebElement others ;
+	
+	@FindBy(xpath = "(//input[@type='checkbox'])[1]")
+	public static WebElement Checkbox1 ;
+	
+	@FindBy(xpath = "//input[@id='txtinputbrfdyn_expiryDateForNoticeToLeave']")
+	public static WebElement interestDate ;
+	
+	@FindBy(xpath = "//textarea[@class='ant-input textarea-Width']")
+	public static WebElement ReasonFA ;
+	
+	@FindBy(xpath = "(//span[contains(text(),'No')])[8]")
+	public static WebElement No8 ;
+	
+	@FindBy(xpath = "(//button[@aria-label='Choose file'])[1]")
+	public static WebElement choosefile ;
+	
+	@FindBy(xpath = "//span[contains(text(),'Fixed term (eg: 6 months)')]")
+	public static WebElement typeofLease ;
+	
+	@FindBy(xpath = "//input[@id='txtinputbrfdyn_dateOfLeaseAgreement']")
+	public static WebElement leaseDate ;
+	
+	@FindBy(xpath = "(//span[contains(text(),'No')])[1]")
+	public static WebElement No1 ;
+	
+	@FindBy(xpath = "//input[@id='txtSearchbrfdyn_propertyAddressSearch']")
+	public static WebElement propertyAddress ;
+	
+	@FindBy(xpath = "(//input[@id='rc_select_9'])[1]")
+	public static WebElement courtLocation ;
+	
+	@FindBy(xpath = "//div[contains(text(),'4805 Bowen Magistrates Court')]")
+	public static WebElement courtLocationop1 ;
+	
+	@FindBy(xpath = "(//span[@unselectable=\"on\"])[11]")
+	public static WebElement straitIslander ;
+	
+	@FindBy(xpath = "(//div[contains(text(),'No')])[3]")
+	public static WebElement straitIslanderop1 ;
+	
+	
+	
+	
+	
 
 
 
