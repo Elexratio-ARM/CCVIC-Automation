@@ -6,6 +6,8 @@ import java.time.Duration;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -36,28 +38,30 @@ public class base extends hooks {
     }
     
     public void sendKeysToElement(WebElement element, String text) {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(element));
-            element.sendKeys(text);
-        } catch (Exception e) {
-            System.out.println("Element not found or not visible: " + e.getMessage());
+        
             
-        }
+
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//html")));
+            wait.until(ExpectedConditions.visibilityOf(element));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            element.sendKeys(text);
+       
     }
     public void clickElement(WebElement element) {
-        try {
+       
+            
+
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loader")));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//html")));
             wait.until(ExpectedConditions.elementToBeClickable(element));
             element.click();
-        } catch (Exception e) {
-            System.out.println("Element not clickable or not found: " + e.getMessage());
-         
-            
-        }
         
     }
     public void sleep(int text) throws InterruptedException {
     	TimeUnit.SECONDS.sleep(text);
 		
 	}
+ 
 
 }

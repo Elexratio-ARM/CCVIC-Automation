@@ -10,7 +10,7 @@ import io.cucumber.junit.CucumberOptions;
     features = "Feature/StartACase.feature", // Update the path to match your project structure
     glue = {"com.stepdefinitions"},
     plugin = {"pretty", "html:target/cucumber-reports"},
-    tags ="@MagistratesCourtStartACase" )
+    tags ="@Originatingapplication" )
 public class Runnerfile {
 
 }

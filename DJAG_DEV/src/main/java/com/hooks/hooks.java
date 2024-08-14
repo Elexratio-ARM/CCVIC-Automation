@@ -159,5 +159,116 @@ public class hooks {
 	
 	@FindBy(xpath = "//span[contains(text(),'OK')]")
 	public static WebElement Ok ;
+	@FindBy(xpath = "//div[text()='Originating application']")
+
+	public  static WebElement OriginatingApp;
+
+	
+
+	@FindBy(xpath = "//span[text()='No']")
+
+	public static WebElement AboutYouNo ;
+
+	
+
+	@FindBy(xpath = "//label[@id='drpbrfdyn_AppType']/following-sibling::div")
+
+	public static WebElement selectorigiapp;
+
+	
+
+	@FindBy(xpath = "//div[@title='Births, Deaths and Marriages Registration Act (QLD)']/div")
+
+	public static WebElement birth;
+
+
+
+	@FindBy(xpath = "(//input[@class='ant-input'])[1]")
+
+    public static WebElement firstname;
+
+	@FindBy(xpath = "(//input[@class='ant-input'])[3]")
+
+	public static WebElement lastname;
+
+	@FindBy(xpath = "(//input[@class='ant-input'])[5]")
+
+	public static WebElement address;
+
+	@FindBy(xpath = "(//input[@class='ant-input'])[8]")
+
+	public static WebElement suburb;
+
+	@FindBy(xpath = "//div[@name='stateOfPlaintiff']")
+
+	public static WebElement state;
+
+	@FindBy(xpath = "//div[text()='Victoria']")
+
+	public static WebElement victoria; 
+
+	@FindBy(xpath = "//div[@name='postalOfPlaintiff']")
+
+	public static WebElement postal;
+
+	@FindBy(xpath = "(//input[@class='ant-input'])[9]")
+
+	public static WebElement mail;
+
+	@FindBy(xpath="(//input[@class='ant-input'])[10]")
+
+	public static WebElement phnumber;
+	@FindBy(xpath = "//input[@id='txtinputbrfdyn_question16']")
+
+	public static WebElement PetitionerPhNo ;
+	@FindBy(xpath = "(//input[@placeholder='Address search'])[1]")
+
+	public static WebElement respondentaddress ;
+	@FindBy(xpath ="(//input[@role='combobox'])[4]")
+
+	public static WebElement courtlocation;
+
+	@FindBy(xpath="//div[@title='Atherton Magistrates Court']")
+
+	public static WebElement courtinul;
+
+	@FindBy(xpath = "//*[@id='brfdyn_form2ClaimFile']/div[2]/div/div/div[1]/div/button")
+
+	public static WebElement form5;
+
+	@FindBy(xpath = "//span[text()='Review application']")
+
+	public static WebElement reviewapp;
+
+	@FindBy(xpath="//span[text()='Submit']")
+
+	public static WebElement submit;
+
+	@FindBy(xpath="//span[text()='OK']")
+
+	public static WebElement ok;
+
+	@FindBy(xpath="//span[text()='Pay later']/parent::button")
+
+	public static WebElement paylater;
+
+	@FindBy(xpath="//span[text()='Pay']")
+
+	public static WebElement pay;
+
+	@FindBy(xpath = "(//span[contains(text(),'Select')])[6]")
+
+	public static WebElement AddressC ;
+	
+	@FindBy(xpath = "//input[@id='txtinputbrfdyn_AgentFirstName']")
+
+	public static WebElement LPeFname ;
+	
+	@FindBy(xpath = "//input[@id='txtinputbrfdyn_AgentFamilyName']")
+
+	public static WebElement LPeLname ;
+
+
+
 	
 }

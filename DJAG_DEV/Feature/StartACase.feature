@@ -16,9 +16,22 @@ Feature: User Login
     Then Enter the amount and interest claiming
     And select No on claim any other costs and click on next
     When select yes on  claim settled by Counsel and Enter one fact for claim
-    Then Enter  relief being claimed and click on next 
-    And select yes on Plaintiff legally represented and provide the Plaintiff infomartion 
+    Then Enter  relief being claimed and click on next
+    And select yes on Plaintiff legally represented and provide the Plaintiff infomartion
     But Select yes on the defendant sued and provide defendant details
     Then Select the heard Magistrates Court
     When review the cost and click on next
     And Click on review the application and submit
+
+  @Originatingapplication
+  Scenario: Verify the user can able to create a case for originatingapplication
+    Given Ckick on start case
+    Then Select court type
+    And Select the case type
+    But Select next on the Checklist page
+    And click next button on the about you
+    And provide the requirements for originating application page
+    And select the applicant type provide the  Applicant information
+    And select the party type and provide the respondent information
+    Then select the court location and upload the document and click review button
+    Then click submit button and click ok button and click pay later button
