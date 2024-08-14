@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,8 +50,14 @@ public class base extends hooks {
             element.click();
         } catch (Exception e) {
             System.out.println("Element not clickable or not found: " + e.getMessage());
+         
             
         }
+        
     }
+    public void sleep(int text) throws InterruptedException {
+    	TimeUnit.SECONDS.sleep(text);
+		
+	}
 
 }

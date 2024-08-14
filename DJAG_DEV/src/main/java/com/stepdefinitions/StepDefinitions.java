@@ -12,6 +12,7 @@ import com.hooks.hooks;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.cucumber.java.en.But;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -25,13 +26,10 @@ public class StepDefinitions extends base {
 		this.scenario = scenario;
 
 	}
-	@After
-	public void quitDriver() throws InterruptedException {
-		if (driver != null) {
-			TimeUnit.SECONDS.sleep(5);
-			driver.quit();
-		}
-	}
+	/*
+	 * @After public void quitDriver() throws InterruptedException { if (driver !=
+	 * null) { TimeUnit.SECONDS.sleep(5); driver.quit(); } }
+	 */
 
 	@Given("Launch the url in Chrome")
 	public void launch_the_url_in_chrome() throws IOException {
@@ -126,8 +124,70 @@ public class StepDefinitions extends base {
 	public void select_yes_on_plaintiff_legally_represented_and_provide_the_plaintiff_infomartion() {
 		clickElement(YES1);
 		clickElement(YES2);
+		sendKeysToElement(Incapacity,("100"));
+		clickElement(Individual);
+		clickElement(Individual);
+		sendKeysToElement(LPFname,("Dan"));
+		sendKeysToElement(LPLname,("Humphrey"));
+		sendKeysToElement(Serachaddress1,("red"));
+		clickElement(Searchicon2);
+		clickElement(AddressA);
+		sendKeysToElement(Email1,("TEst11@auto.mation"));
+		sendKeysToElement(plaintifPHNO,("9911223344"));
 		
+		sendKeysToElement(LPFirstname,("Chuck "));
+		sendKeysToElement(LPlastname,("Bass"));
+		sendKeysToElement(Serachaddress2,("red"));
+		clickElement(Searchicon3);
+		clickElement(AddressB);
+		sendKeysToElement(Email2,("TData11@auto.mation"));
+		sendKeysToElement(PractitionerPhNo,("9911998844"));
+		clickElement(Yes3);
+		clickElement(next);
 	}
+		@But ("Select yes on the defendant sued and provide defendant details")
+		public void select_yes_on_the_defendant_sued_and_provide_defendant_details() throws InterruptedException {
+			clickElement(YES1);
+			sendKeysToElement(Incapacity,("1000"));
+			clickElement(Individual);
+			sendKeysToElement(DefName,("serena "));
+			sendKeysToElement(DeLName,("van der woodsen"));
+			sendKeysToElement(DefAddressSearch,("red"));
+			clickElement(Searchicon2);
+			clickElement(AddressA);
+			sleep(5);
+			clickElement(next);
+									
+		}
+		@Then("Select the heard Magistrates Court")
+		public void select_the_heard_magistrates_court() {
+			clickElement(heardingcourt);
+			clickElement(heardingcourtop1);
+			clickElement(next);
+		}
+
+		@When("review the cost and click on next")
+		public void review_the_cost_and_click_on_next() {
+			clickElement(next);
+		}
+
+		@When("Click on review the application and submit")
+		public void click_on_review_the_application_and_submit() {
+		    clickElement(Reviewapplication);
+		    clickElement(Submit);
+		    clickElement(Ok);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
 
 
 

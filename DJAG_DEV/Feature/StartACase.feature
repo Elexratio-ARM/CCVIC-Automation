@@ -18,4 +18,7 @@ Feature: User Login
     When select yes on  claim settled by Counsel and Enter one fact for claim
     Then Enter  relief being claimed and click on next 
     And select yes on Plaintiff legally represented and provide the Plaintiff infomartion 
-    
+    But Select yes on the defendant sued and provide defendant details
+    Then Select the heard Magistrates Court
+    When review the cost and click on next
+    And Click on review the application and submit
