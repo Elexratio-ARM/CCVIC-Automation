@@ -41,7 +41,7 @@ public class hooks {
 	@FindBy(xpath = "//span[contains(text(),'Proceed ')]")
 	public static WebElement Proceed ;
 
-	@FindBy(xpath = "//span[contains(text(),'Next')]")
+	@FindBy(xpath = "//span[contains(text(),'Next')]/parent::button")
 	public static WebElement ChecklistNext ;
 
 	@FindBy(xpath = "(//input[@type='checkbox'])[1]")
@@ -89,7 +89,7 @@ public class hooks {
 	@FindBy(xpath = "(//input[@class='ant-input'])[1]")
 	public static WebElement Incapacity ;
 
-	@FindBy(xpath = "//span[contains(text(),'Individual')]")
+	@FindBy(xpath = "//span[contains(text(),'Individual')]/parent::span")
 	public static WebElement Individual ;
 
 	@FindBy(xpath = "(//input[@placeholder='Address look-up'])[1]")
@@ -154,10 +154,10 @@ public class hooks {
 	@FindBy(xpath = "//span[contains(text(),'Review application')]")
 	public static WebElement Reviewapplication ;
 	
-	@FindBy(xpath = "//span[contains(text(),'Submit')]")
+	@FindBy(xpath = "//span[contains(text(),'Submit')]/parent::button")
 	public static WebElement Submit ;
 	
-	@FindBy(xpath = "//span[contains(text(),'OK')]")
+	@FindBy(xpath = "//span[contains(text(),'OK')]/parent::button")
 	public static WebElement Ok ;
 	@FindBy(xpath = "//div[text()='Originating application']")
 
@@ -240,7 +240,7 @@ public class hooks {
 
 	public static WebElement reviewapp;
 
-	@FindBy(xpath="//span[text()='Submit']")
+	@FindBy(xpath="//span[text()='Submit']/parent::button")
 
 	public static WebElement submit;
 
@@ -270,5 +270,116 @@ public class hooks {
 
 
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@FindBy(xpath = "//h3[text()='How to join']/parent::a")
+	public static WebElement joinacase;
+	@FindBy(xpath="//input[@placeholder='Search your Case']")
+	public static WebElement joinacasesearch;
+	@FindBy(xpath = "//button[@type='submit']")
+	public static WebElement searchbutton;
+	@FindBy(xpath = "(//button[@type='button'])[2]")
+	public static WebElement actionselect;
+	@FindBy(xpath = "//input[@id='false']/parent::span")
+	public static WebElement noforjoincase;
+	@FindBy(xpath  = "//input[@aria-label='ApplicantFIrstName ApplicantLastName']")
+	public static WebElement ApplicantFIrstNameApplicantLastName;
+	@FindBy(xpath = "//input[@name='DefName sdf']")
+	public static WebElement Defname;
+	@FindBy(xpath = "//input[@id='DocumentType']")
+	public static WebElement doctypejoincase;
+	@FindBy(xpath = "//div[@title='QCAT Case Access Request']")
+	public static WebElement Qcatform;
+	@FindBy(xpath = "//div[@title='Form 45 - Application to be joined to a proceeding']")
+	public static WebElement Form45form;
+	@FindBy(xpath = "//input[@id='FormType']/parent::span/parent::div")
+	public static WebElement formtypeQcat;
+	@FindBy(xpath = "//div[text()='QCAT Case access request']")
+	public static WebElement formforformtypeQcat;
+	@FindBy(xpath = "(//button[@type='button'])[10]")
+	public static WebElement submitjoinacase;
+	@FindBy(xpath = "//input[@id='brfdyn_partiesi_0']")
+	public static WebElement ApplicantNameAddressforService;
+	@FindBy(xpath = "//button[@aria-label='Choose file']")
+	public static WebElement uploadaffidavit;
+	@FindBy(xpath = "//input[@id='txtSearchbrfdyn_addressLookup']")
+	public static WebElement Addresslookupjoinacase;
+	@FindBy(xpath = "//button[@type='button']/parent::span")
+	public static WebElement Addresslookupjoinacaseicon;
+	@FindBy(xpath = "(//span[text()='Select'])[50]")
+	public static WebElement AddressforQCATCaseaccessrequest;
+	@FindBy(xpath = "(//span[text()='Review application']/parent::button)")
+	public static WebElement reviewapplicationforqcatajc;
+	@FindBy(xpath = "(//button[@aria-label='Submit'])[1]")
+	public static WebElement  submitforjoinacase;
+
+	@FindBy(xpath = "//span[text()='OK']/parent::button")
+	public static WebElement  okforjoinacase;
+	
+	@FindBy(xpath = "//button[@aria-label='Applicant']")
+	public static WebElement Applicantforjoinacase;
+	@FindBy(xpath = "//textarea[@autocomplete='stop']")
+	public static WebElement textareajoinacase;
+	@FindBy(xpath = "//input[@id='txtSearchbrfdyn_addressSearchOfPlaintiff']")
+	public static WebElement Addresslookupforjoinacase;
+	@FindBy(xpath = "(//button[@type='button'])[8]")
+	public static WebElement Addressiconforjoinacase;
+	@FindBy(xpath = "(//span[text()='Select'])[5]")
+	public static WebElement Addresscjoincase ;
+	@FindBy(xpath = "(//input[@value='item1'])[1]")
+	public static WebElement informationtrue;
+	@FindBy(xpath = "(//input[@value='item1'])[2]")
+	public static WebElement informationtrue2;
+	
+	@FindBy(xpath = "//b[text()='ApplicantFIrstName ApplicantLastName']/parent::span")
+	public static WebElement selectrelaventpartyApp;
+	
+	@FindBy(xpath = "//b[text()='DefName sdf']/parent::span")
+	public static WebElement selectrelaventpartyDef;
 	
 }

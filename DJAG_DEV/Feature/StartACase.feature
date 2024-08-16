@@ -35,3 +35,37 @@ Feature: User Login
     And select the party type and provide the respondent information
     Then select the court location and upload the document and click review button
     Then click submit button and click ok button and click pay later button
+
+  @JoinACaseQCAT
+  Scenario: join a case no to Are you already a party or a representative to the case checkbox
+    And click join a case tab and enter LodNumber and click search button
+    And click select button and click are you already a party or not
+    And select the document type and form type
+    And select parties in address for service page
+    And upload affidavit for address for service page
+    And provide address for address for service page and click review application button
+
+  @JoinACaseForm45
+  Scenario: join a case no to Are you already a party or a representative to the case checkbox
+    And click join a case tab and enter LodNumber and click search button
+    And click select button and click are you already a party or not
+    And select the document type and form type
+    But Select next on the Checklist page
+    And select the role and provide the address
+    And select the interpreter required or not
+    And select the checkboxes for acknowledgement
+    And click reviewapplication and click submit and then click ok
+
+  @JoinACaseApplicant
+  Scenario: join a case no to Are you already a party or a representative to the case checkbox
+    And click join a case tab and enter LodNumber and click search button
+    And click select button and click are you already a party or not
+    And select relevant party
+    And click submit and click ok
+
+  @JoinACaseDefantant
+  Scenario: join a case no to Are you already a party or a representative to the case checkbox
+    And click join a case tab and enter LodNumber and click search button
+    And click select button and click are you already a party or not
+    And select relevant party
+    And click submit and click ok
