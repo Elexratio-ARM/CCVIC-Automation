@@ -36,6 +36,25 @@ Feature: User Login
     Then select the court location and upload the document and click review button
     Then click submit button and click ok button and click pay later button
 
+  @QCATResidentialTenancyDisputes
+  Scenario: Verify the user can able to create a Residential tenancy disputes case in QCAT
+    Given Ckick on start case
+    Then Select court type
+    And Select the case type
+    But Select next on the Checklist page
+    Then Select tenant on making the application
+    And Select Tribunal order on orders and Yes on form20
+    When provide date the Notice and upload form20 file
+    Then Enter the reason you are applying and click next
+    Then Enter the date lease agreement and click on next
+    When select yes on seeking cost and upload the supporting file
+    Then select yes on property information and provide properties details
+    And Select the court location on click on next
+    When Fill the applicant details
+    Then Fill the respondent details
+    And Select Yes on lodge and pay and review the application
+    Then click on submit
+
   @JoinACaseQCAT
   Scenario: join a case no to Are you already a party or a representative to the case checkbox
     And click join a case tab and enter LodNumber and click search button

@@ -33,8 +33,8 @@ import io.cucumber.java.en.When;
 
 public class StepDefinitions extends base {
 	private hooks hook;
-	private String filePath = projectPath + "\\FileStorage\\Get_Started_With_Smallpdf_DP6_2024.07.26.05.16.51.pdf";
-	private String fileupload = projectPath + "\\FileStorage\\Get_Started_With_Smallpdf_DP6_2024.07.26.05.16.51.pdf";
+	//private JavascriptExecutor js = (JavascriptExecutor)driver; 
+	private String filePath = projectPath + "/File/Get_Started_With_Smallpdf_DP6_2024.07.26.05.16.51.pdf";
 	private Scenario scenario;
 	@Before
 	public void before(Scenario scenario) {
@@ -75,8 +75,16 @@ public class StepDefinitions extends base {
 	@Then("Select court type")
 	public void select_court_type() {
 		clickElement(CourtType);
-		clickElement(MagistratesCourt);
+		if(scenario.getSourceTagNames().contains( "@MagistratesCourtStartACase")||scenario.getSourceTagNames().contains("@Originatingapplication"))
+		{
+			clickElement(MagistratesCourt);
+		}
+		else if (scenario.getSourceTagNames().contains("@QCATResidentialTenancyDisputes"))
+		{
+			clickElement(QCAT);
+		}
 	}
+
 
 	@Then("Select the case type")
 	public void select_the_case_type() throws InterruptedException {
@@ -84,8 +92,11 @@ public class StepDefinitions extends base {
 
 		if(scenario.getSourceTagNames().contains( "@MagistratesCourtStartACase"))
 			clickElement(ClaimCase);
+		else if (scenario.getSourceTagNames().contains("@QCATResidentialTenancyDisputes"))
+			clickElement(RTD);
 		else if (scenario.getSourceTagNames().contains( "@Originatingapplication"))
 			clickElement(OriginatingApp);
+
 		sleep(5);
 		clickElement(Proceed);
 	}
@@ -409,13 +420,116 @@ public class StepDefinitions extends base {
 			clickElement(selectrelaventpartyDef);
 		}
 	}
-
-	@Given("click submit and click ok")
-	public void click_submit_and_click_ok() throws InterruptedException {
-		clickElement(submitjoinacase);
-		sleep(10);
+	@Then("click submit button and click ok button and click pay later button")
+	public void click_submit_button_and_click_ok_button_and_click_pay_later_button() throws InterruptedException {
+		clickElement(submit);
+		sleep(20);
 		clickElement(ok);
+		// clickElement(paylater);
+	}
+	@Then("Select tenant on making the application")
+	public void select_tenant_on_making_the_application() {
+		clickElement(Tenant);
+		clickElement(next);
+	}
+
+	@Then("Select Tribunal order on orders and Yes on form20")
+	public void select_tribunal_order_on_orders_and_yes_on_form20() throws InterruptedException {
+		sleep(5); 
+		JavascriptExecutor js = (JavascriptExecutor)driver; 
+		js.executeScript("arguments[0].click()", others);
+		JavascriptExecutor js1 = (JavascriptExecutor)driver; 
+		js1.executeScript("arguments[0].click()", Checkbox1);
+		clickElement(YES1);
+
+
+	}
+
+	@When("provide date the Notice and upload form20 file")
+	public void provide_date_the_notice_and_upload_form20_file() throws InterruptedException {
 		sleep(5);
+		sendKeysToElement(interestDate, ("2024-08-15"));
+		Fromdate.sendKeys(Keys.TAB);
+		sendKeysToElement(interestDate, ("2024"));
+	}
+
+	@Then("Enter the reason you are applying and click next")
+	public void enter_the_reason_you_are_applying_and_click_next() throws AWTException, InterruptedException {
+		sendKeysToElement(ReasonFA, ("Test reason"));
+		clickElement(No8);
+		clickElement(next);
+		
+	}
+
+	
+
+	@Then("Enter the date lease agreement and click on next")
+	public void enter_the_date_lease_agreement_and_click_on_next() {
+		clickElement(typeofLease);
+		sendKeysToElement(leaseDate, ("2024-08-15"));
+		Fromdate.sendKeys(Keys.TAB);
+		sendKeysToElement(leaseDate, ("2024"));
+		clickElement(No);
+		clickElement(next);
+	}
+
+	@When("select yes on seeking cost and upload the supporting file")
+	public void select_yes_on_seeking_cost_and_upload_the_supporting_file() {
+		clickElement(No1);
+		clickElement(No2);
+		clickElement(next);
+	}
+	
+	@Then("select yes on property information and provide properties details")
+	public void select_yes_on_property_information_and_provide_properties_details() {
+		clickElement(No1);
+		sendKeysToElement(propertyAddress, ("red"));
+		clickElement(Searchicon2);
+		clickElement(AddressA);
+		clickElement(next);
+	}
+
+	@Then("Select the court location on click on next")
+	public void select_the_court_location_on_click_on_next() {
+		clickElement(courtLocation);
+		clickElement(courtLocationop1);
+		clickElement(next);
+	}
+
+	@When("Fill the applicant details")
+	public void fill_the_applicant_details() {
+		clickElement(No1);
+		clickElement(Individual);
+		sendKeysToElement(firstname, ("blair "));
+		sendKeysToElement(lastname, ("waldorf"));
+		sendKeysToElement(address4, ("red"));
+		clickElement(Searchicon2);
+		clickElement(AddressA);
+		sendKeysToElement(Email1, ("ABC@kk.co"));
+		sendKeysToElement(plaintifPHNO, ("1122334455"));
+		clickElement(straitIslander);
+		clickElement(straitIslanderop1);
+		
+		
+		
+	}
+
+	@Then("Fill the respondent details")
+	public void fill_the_respondent_details() {
+		// Write code here that turns the phrase above into concrete actions
+		throw new io.cucumber.java.PendingException();
+	}
+
+	@Then("Select Yes on lodge and pay and review the application")
+	public void select_yes_on_lodge_and_pay_and_review_the_application() {
+		// Write code here that turns the phrase above into concrete actions
+		throw new io.cucumber.java.PendingException();
+	}
+
+	@Then("click on submit")
+	public void click_on_submit() {
+		// Write code here that turns the phrase above into concrete actions
+		throw new io.cucumber.java.PendingException();
 	}
 
 }
