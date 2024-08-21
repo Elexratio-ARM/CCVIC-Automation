@@ -7,7 +7,7 @@ Feature: User Login
 
   @MagistratesCourtStartACase
   Scenario: Verify the user can able to create a guided claim case
-    Given Ckick on start case
+    Given Click on start case
     Then Select court type
     And Select the case type
     Then Slect the form type
@@ -25,7 +25,7 @@ Feature: User Login
 
   @Originatingapplication
   Scenario: Verify the user can able to create a case for originatingapplication
-    Given Ckick on start case
+    Given Click on start case
     Then Select court type
     And Select the case type
     But Select next on the Checklist page
@@ -38,7 +38,7 @@ Feature: User Login
 
   @QCATResidentialTenancyDisputes
   Scenario: Verify the user can able to create a Residential tenancy disputes case in QCAT
-    Given Ckick on start case
+    Given Click on start case
     Then Select court type
     And Select the case type
     But Select next on the Checklist page
@@ -87,4 +87,20 @@ Feature: User Login
     And click join a case tab and enter LodNumber and click search button
     And click select button and click are you already a party or not
     And select relevant party
+    And click submit and click ok
+
+  @FileaDocumentForQcat
+  Scenario: file a document for Qcat case number
+    Then Search the case number and click file a document tab
+    And Select the document group and type and form type and click proceed
+    And Select next on the Checklist page
+    And fill the details of Application and matter details page and click next
+    And fill the details of lodge and pay page and click review apllication
+    And click submit and click ok
+
+  @FileaDocumentForMagistrate
+  Scenario: file a document for Qcat case number
+    Then Search the case number and click file a document tab
+    And Select the document group and type and form type and click proceed
+    And fill the details of document information
     And click submit and click ok

@@ -17,6 +17,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -32,9 +33,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class StepDefinitions extends base {
-	private hooks hook;
-	//private JavascriptExecutor js = (JavascriptExecutor)driver; 
-	private String filePath = projectPath + "/File/Get_Started_With_Smallpdf_DP6_2024.07.26.05.16.51.pdf";
+
+	private String fileupload = projectPath + "\\FileStorage\\Get_Started_With_Smallpdf_DP6_2024.07.26.05.16.51.pdf";
 	private Scenario scenario;
 	@Before
 	public void before(Scenario scenario) {
@@ -67,7 +67,7 @@ public class StepDefinitions extends base {
 	}
 
 
-	@Given("Ckick on start case")
+	@Given("Click on start case")
 	public void ckick_on_start_case() {
 		clickElement(startCase);
 	}
@@ -420,13 +420,7 @@ public class StepDefinitions extends base {
 			clickElement(selectrelaventpartyDef);
 		}
 	}
-	@Then("click submit button and click ok button and click pay later button")
-	public void click_submit_button_and_click_ok_button_and_click_pay_later_button() throws InterruptedException {
-		clickElement(submit);
-		sleep(20);
-		clickElement(ok);
-		// clickElement(paylater);
-	}
+
 	@Then("Select tenant on making the application")
 	public void select_tenant_on_making_the_application() {
 		clickElement(Tenant);
@@ -530,6 +524,123 @@ public class StepDefinitions extends base {
 	public void click_on_submit() {
 		// Write code here that turns the phrase above into concrete actions
 		throw new io.cucumber.java.PendingException();
+	}
+	@Given("click submit and click ok")
+	public void click_submit_and_click_ok() throws InterruptedException {
+		sleep(5);
+		clickElement(submit);
+		sleep(10);
+		clickElement(ok);
+		sleep(5);
+	}
+	
+	@Then("Search the case number and click file a document tab")
+	public void search_the_case_number_and_click_file_a_document_tab() throws InterruptedException {
+	  
+		clickElement(cases);
+		String caseno = null;
+		if(scenario.getSourceTagNames().contains("@FileaDocumentForMagistrate"))
+		{
+			caseno="McCaseNumber";
+		}
+		else if(scenario.getSourceTagNames().contains("@FileaDocumentForQcat"))
+		{
+			caseno="QcatCaseNumber";
+		}
+	 if(caseno!=null) {
+	   sendKeysToElement(casenumbersearchbox, properties.getProperty(caseno));
+	 }
+	   sleep(2);
+	   clickElement(casenumbersearchboxicon);
+	   clickElement(casenumber);
+	   clickElement(fileadocument);
+	   sleep(5);
+	}
+
+	@Then("Select the document group and type and form type and click proceed")
+	public void select_the_document_group_and_type_and_form_type_and_click_proceed() throws InterruptedException, AWTException {
+		
+   clickElement(documentgroup);
+   WebElement doc=null;
+   WebElement docType=null;
+   if(scenario.getSourceTagNames().contains("@FileaDocumentForMagistrate"))
+   {
+	   doc=Notices;
+	   docType=Form93;
+	   
+   }
+   else if(scenario.getSourceTagNames().contains("@FileaDocumentForQcat"))
+	{
+		doc=Completeapplication;
+		docType=DocumentType;
+	}
+   clickElement(doc);
+   sleep(2);
+   clickElement(DocumentType);
+   sleep(2);
+   Robot rb = new Robot();
+   rb.keyPress(KeyEvent.VK_UP);
+   rb.keyRelease(KeyEvent.VK_UP);
+   clickElement(docType);
+   clickElement(Proceed);
+   
+	}
+
+	@Then("fill the details of Application and matter details page and click next")
+	public void fill_the_details_of_application_and_matter_details_page_and_click_next() throws InterruptedException {
+		clickElement(PartfilingDef);
+		sendKeysToElement(FNOfParty, "Thor odinson");
+		clickElement(PersonToAttend);
+		sendKeysToElement(HearingDate, "20-08-2024");
+		sendKeysToElement(HearingTime, "12:00");
+		sendKeysToElement(NameForFileDocument, "Thor Odinson");
+		sendKeysToElement(AddressLookupForFileADoc, "red");
+		sleep(3);
+		clickElement(AddressIconForFileADoc);
+		clickElement(AddressForFileADoc);
+		sleep(2);
+		clickElement(No);
+		sendKeysToElement(textareajoinacase, "test  a scenario");
+		clickElement(next);
+	 
+	}
+
+	@Then("fill the details of lodge and pay page and click review apllication")
+	public void fill_the_details_of_lodge_and_pay_page_and_click_review_apllication() throws InterruptedException {
+	  clickElement(No);
+	  clickElement(No2);
+	 
+	  clickElement(Checkbox5);
+	  clickElement(Checkbox6);
+	  clickElement(reviewapp);
+	}
+	@Then("fill the details of document information")
+	public void fill_the_details_of_document_information() throws InterruptedException, AWTException {
+		clickElement(PartfilingDef);
+		clickElement(uploadaffidavit);
+		clickElement(SelectFile);
+		Robot rb = new Robot();
+		StringSelection stringSelection = new StringSelection(fileupload);
+		sleep(3);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+		rb.keyPress(KeyEvent.VK_CONTROL);
+		rb.keyPress(KeyEvent.VK_V);
+		sleep(3);
+		rb.keyRelease(KeyEvent.VK_V);
+		rb.keyRelease(KeyEvent.VK_CONTROL);   
+		rb.keyPress(KeyEvent.VK_ENTER);
+		rb.keyRelease(KeyEvent.VK_ENTER);
+		sleep(1);
+		clickElement(Save);
+		sleep(3);
+		sendKeysToElement(Addresslookupjoinacase, "red");
+		sleep(3);
+		clickElement(AddressIconForFileADoc);
+		clickElement(Address2);
+		sendKeysToElement(Email1,("TEst11@auto.mation"));
+		sendKeysToElement(mail, "9876543212");
+		clickElement(next);
+		clickElement(Reviewapplication);
 	}
 
 }
