@@ -63,13 +63,13 @@ public class StepDefinitions extends BaseClass {
 		this.scenario = scenario;
 
 	}
-	@After
-    public void quitDriver() throws InterruptedException {
-        if (driver != null) {
-        	TimeUnit.SECONDS.sleep(5);
-            driver.quit();
-        }
-	}
+//	@After
+//    public void quitDriver() throws InterruptedException {
+//        if (driver != null) {
+//        	TimeUnit.SECONDS.sleep(5);
+//            driver.quit();
+//        }
+//	}
 
 	@Given("Launch the url in Chrome")
 	public void launch_the_url_in_chrome() throws IOException {
@@ -297,15 +297,16 @@ public class StepDefinitions extends BaseClass {
 	}
 
 	@Then("Select document type and provide document name")
-	public void select_document_type_and_provide_document_name() {
+	public void select_document_type_and_provide_document_name() throws InterruptedException {
 		uploadMaterialPage.Waitloader();
-		fileDocumentPage.clickCoverletterOP();
+		
 		if ((scenario.getSourceTagNames().contains(" @FileADocumentCoverletter")))
 		{
 			fileDocumentPage.clickCoverletterOP();
 		}
 		else if((scenario.getSourceTagNames().contains("@FileADocumentObjection"))){
 			fileDocumentPage.clickObjectionop();
+		casePartyObjectionPage.objectionReason();
 		}
 		else if((scenario.getSourceTagNames().contains("@FileADocumentSubpoenaMaterial"))){
 			fileDocumentPage.clickSubpoenaMaterialOP();
@@ -313,7 +314,7 @@ public class StepDefinitions extends BaseClass {
 		else if((scenario.getSourceTagNames().contains("@FileADocumentWithdrawal"))){
 			fileDocumentPage.clickWithdrawalop();
 		}
-
+      TimeUnit.SECONDS.sleep(3);
 		fileDocumentPage.clickDocumentName();
 	}
 

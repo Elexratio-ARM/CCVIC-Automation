@@ -19,13 +19,13 @@ public class FileDocumentPage{
 	private By ChooseFile = By.xpath("(//input[@onclick=\"this.value = null\"])[2]");
 	private By DocumentType = By.xpath("(//select[@class=\"form-control ng-pristine ng-invalid ng-touched\"])");
 	private By CoverletterOP = By.xpath("//Option[contains(text(),'Cover Letter')]");
-	private By Objectionop = By.xpath("(//Option[contains(text(),'Objection')])[2]");
+	private By Objectionop = By.xpath("(//Option[contains(text(),'Objection')])[1]");
 	private By SubpoenaMaterialOP = By.xpath("//Option[contains(text(),'Subpoena material')]");
 	private By Withdrawalop = By.xpath("//Option[contains(text(),'Withdrawal')]");
 	private By DocumentName = By.xpath("//input[@type='text']");
 	private By MedicRadio = By.xpath("(//input[@type=\"radio\"])[4]");
 	private By Submit = By.xpath("(//button[@class=\"lato btn btn-primary\"])[2]");
-	private By Ok = By.xpath("(//button[contains(text(),' Ok ')])[2]");
+	private By Ok = By.xpath("(//button[contains(text(),' Ok ')])");
 	private By inspectSidemenu = By.xpath("//span[@class='glyphicon glyphicon-search']");
 	private By RequestInspection = By.xpath("//a[@class='join_btn white']");
 	private By casenumberfield = By.xpath("//input[@name='externalCaseNumber']");
